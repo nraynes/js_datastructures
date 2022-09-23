@@ -1,0 +1,14 @@
+{
+  "name": "js_datastructures",
+  "version": "1.0.0",
+  "description": "Commonly used data structures implemented in one place.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx jest"
+  },
+  "author": "Nicholas R Raynes",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.0.3"
+  }
+}
