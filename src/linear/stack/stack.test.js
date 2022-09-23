@@ -60,11 +60,7 @@ describe('Stack Data Structure', () => {
   describe('Should have a pop method to remove an item from the top of the stack.', () => {
 
     test('Should remove the top item from a stack.', () => {
-      const itemStack = new Stack();
-      itemStack.push('Test Item');
-      itemStack.push('Test Item 2');
-      itemStack.push('Test Item 3');
-      itemStack.push('Test Item 4');
+      const itemStack = new Stack('Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4');
       itemStack.pop()
       expect(itemStack.top()).toBe('Test Item 3')
       itemStack.pop()
@@ -112,6 +108,39 @@ describe('Stack Data Structure', () => {
       expect(itemStack.size()).toBe(3)
       itemStack.push('Test Item 4');
       expect(itemStack.size()).toBe(4)
+    })
+
+  })
+
+  describe('Should have a list property for the stack.', () => {
+
+    test('Should return with the whole stack if the list property is called.', () => {
+      const itemStack = new Stack('Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4');
+      expect(itemStack.list).toEqual(expect.arrayContaining(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']));
+    })
+
+  })
+
+  describe('Should have a reverse function that reverses the order of the stack.', () => {
+
+    test('Should reverse the order of the stack.', () => {
+      const itemStack = new Stack('Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4');
+      itemStack.reverse();
+      expect(itemStack.list).toEqual(expect.arrayContaining(['Test Item 4', 'Test Item 3', 'Test Item 2', 'Test Item']));
+    })
+
+    test('Should reverse the order of the stack back to its original form if called twice.', () => {
+      const itemStack = new Stack('Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4');
+      itemStack.reverse();
+      expect(itemStack.list).toEqual(expect.arrayContaining(['Test Item 4', 'Test Item 3', 'Test Item 2', 'Test Item']));
+      itemStack.reverse();
+      expect(itemStack.list).toEqual(expect.arrayContaining(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']));
+    })
+
+    test('Should do nothing if the stack is empty.', () => {
+      const itemStack = new Stack();
+      itemStack.reverse();
+      expect(itemStack.list).toEqual(expect.arrayContaining([]));
     })
 
   })
