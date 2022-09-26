@@ -13,14 +13,17 @@ const SLLNode = require('./singlyLinkedListNode');
 class SLL {
   #max = 0;
   #head = null;
+  #size = 0;
   constructor(items, maxSize, arrayLiteral) {
     if (maxSize && typeof maxSize !== 'number') throw 'maxSize must be a number!';
     if (arrayLiteral && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     const itemsIsArray = Array.isArray(items);
     const recurse = (i, max = false) => {
-      if (i+1 < items.length && (!max || i+1 < maxSize)) return new SLLNode(items[i], recurse(i+1, max))
-      return new SLLNode(items[i])
+      this.#size++
+      if (i+1 < items.length && (!max || i+1 < maxSize)) return new SLLNode(items[i], recurse(i+1, max));
+      return new SLLNode(items[i]);
     }
+    this.#size = items ? 1 : 0
     this.#head = items || itemsIsArray
       ? itemsIsArray && !arrayLiteral && items.length > 0
         ? maxSize
@@ -44,6 +47,7 @@ class SLL {
       } else {
         if (!this.#max || i < this.#max) {
           node.next = new SLLNode(item);
+          this.#size++
         }
       }
     }
@@ -51,13 +55,13 @@ class SLL {
       recurse(this.#head, 1);
     } else {
       this.#head = new SLLNode(item);
+      this.#size++
     }
   }
 
   // Get the size of the list.
   size() {
-    const recurse = (node, i) => (node.next ? recurse(node.next, i+1) : i);
-    return this.#head ? recurse(this.#head, 1) : 0;
+    return this.#size;
   }
 
   // Add a node to the beginning of the list.
@@ -65,7 +69,17 @@ class SLL {
     if (!this.#max || this.size() < this.#max) {
       const temp = new SLLNode(item, this.#head);
       this.#head = temp;
+      this.#size++
     }
+  }
+
+  getMax() {
+    return this.#max || null;
+  }
+
+  setMax(maxSize) {
+    if (maxSize && typeof maxSize !== 'number') throw 'maxSize must be a number!';
+    this.#max = maxSize || 0;
   }
 }
 
