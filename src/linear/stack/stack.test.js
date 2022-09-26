@@ -101,6 +101,15 @@ describe('Stack Data Structure', () => {
 
   })
 
+  describe('Should not be able to access list property directly.', () => {
+    
+    test('Should return with undefined if list property is accessed directly.', () => {
+      const myStack = new Stack(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(myStack.list).toBe(undefined);
+    })
+
+  })
+
   describe('Should have a method to get the maximum size of the stack.', () => {
 
     test('Should return null if there is no maximum size.', () => {

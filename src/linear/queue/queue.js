@@ -48,9 +48,7 @@ class Queue {
   // Remove the next item in the queue and return it.
   dequeue() {
     if (this.#list.length) {
-      const nextItem = this.#list[this.#list.length-1];
-      this.#list.pop();
-      return nextItem;
+      return this.#list.pop();
     }
     return null;
   }
