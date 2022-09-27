@@ -46,7 +46,7 @@ class Stack {
 
   // Remove the top item from the stack.
   pop() {
-    this.#list.pop()
+    return this.#list.pop()
   }
 
   // Get the top item from the stack.

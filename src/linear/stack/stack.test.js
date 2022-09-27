@@ -178,11 +178,11 @@ describe('Stack Data Structure', () => {
 
   describe('Should have a pop method to remove an item from the top of the stack.', () => {
 
-    test('Should remove the top item from a stack.', () => {
+    test('Should remove the top item from a stack and return it.', () => {
       const myStack = new Stack(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      myStack.pop()
+      expect(myStack.pop()).toBe('Test Item 4')
       expect(myStack.peek()).toBe('Test Item 3')
-      myStack.pop()
+      expect(myStack.pop()).toBe('Test Item 3')
       expect(myStack.peek()).toBe('Test Item 2')
     })
 
