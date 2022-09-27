@@ -1,6 +1,6 @@
 {
   "name": "complete_data_structures",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Commonly used data structures implemented in one place.",
   "main": "index.js",
   "scripts": {
