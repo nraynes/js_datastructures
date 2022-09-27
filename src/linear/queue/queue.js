@@ -13,7 +13,7 @@ class Queue {
   #max = 0;
   constructor(items, maxSize, arrayLiteral) {
     if (maxSize && typeof maxSize !== 'number') throw 'maxSize must be a number!';
-    if (arrayLiteral && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
+    if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     const itemsIsArray = Array.isArray(items);
     this.#list = items || itemsIsArray
       ? itemsIsArray && !arrayLiteral && items.length > 0
@@ -32,7 +32,7 @@ class Queue {
 
   // Add an item to the queue.
   enqueue(item, arrayLiteral) {
-    if (arrayLiteral && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
+    if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     const itemIsArray = Array.isArray(item);
     if ((item || itemIsArray) && (!this.#max || this.#list.length < this.#max)) {
       if (itemIsArray && !arrayLiteral && item.length > 0) {

@@ -17,7 +17,7 @@ class SLL {
   #size = 0;
   constructor(items, maxSize, arrayLiteral) {
     if (maxSize && typeof maxSize !== 'number') throw 'maxSize must be a number!';
-    if (arrayLiteral && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
+    if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     const itemsIsArray = Array.isArray(items);
     const recurse = (i, max) => {
       this.#size++
@@ -44,7 +44,7 @@ class SLL {
 
   // Add a node to the very end of the list.
   addToTail(item, arrayLiteral) {
-    if (arrayLiteral && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
+    if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     const itemIsArray = Array.isArray(item);
     let j = 0;
     const recurse = (node, i) => {
@@ -79,7 +79,7 @@ class SLL {
 
   // Add a node to the beginning of the list.
   addToHead(item, arrayLiteral) {
-    if (arrayLiteral && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
+    if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     const itemIsArray = Array.isArray(item);
     let j = itemIsArray && !arrayLiteral && item.length > 0 ? item.length : 0;
     if (!this.#max || this.size() < this.#max) {
@@ -187,11 +187,14 @@ class SLL {
 
   // Insert node at a specific index.
   insertAt(index, data, arrayLiteral) {
+    if (index && typeof index !== 'number') throw 'index must be a number!';
+    if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
 
   }
 
   // Remove node at a specific index.
   removeAt(index) {
+    if (index && typeof index !== 'number') throw 'index must be a number!';
 
   }
 
@@ -207,6 +210,7 @@ class SLL {
 
   // Remove all nodes containing specific data.
   removeData(data, extensiveComparison) {
+    if (extensiveComparison !== undefined && typeof extensiveComparison !== 'boolean') throw 'extensiveComparison must be a boolean!';
 
   }
 }
