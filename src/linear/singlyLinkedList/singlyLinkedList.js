@@ -189,7 +189,8 @@ class SLL {
   insertAt(index, data, arrayLiteral) {
     if (index && typeof index !== 'number') throw 'index must be a number!';
     if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
-
+    const itemsIsArray = Array.isArray(items);
+    
   }
 
   // Remove node at a specific index.

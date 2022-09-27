@@ -729,509 +729,509 @@ describe('Singly Linked List Data Structure', () => {
 
   })
 
-  describe('Should have a method to insert data at a specific index.', () => {
+  // describe('Should have a method to insert data at a specific index.', () => {
 
-    test('Should be able to use insertAt to insert data at a specific index.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(2, 'Inserted Data');
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Inserted Data',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: null
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert data at a specific index.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(2, 'Inserted Data');
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Inserted Data',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: null
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should be able to use insertAt to insert data at the head.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(0, 'Inserted Data');
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Inserted Data',
-        next: expect.objectContaining({
-          data: 'Test Item',
-          next: expect.objectContaining({
-            data: 'Test Item 2',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: null
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert data at the head.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(0, 'Inserted Data');
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Inserted Data',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 2',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: null
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should be able to use insertAt to insert data at the tail.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(4, 'Inserted Data');
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Inserted Data',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: expect.objectContaining({
-                  data: 'Inserted Data',
-                  next: null
-                })
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert data at the tail.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(4, 'Inserted Data');
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Inserted Data',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: expect.objectContaining({
+  //                 data: 'Inserted Data',
+  //                 next: null
+  //               })
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should not do anything if the number passed is negative or greater than the size of the list plus one.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(5, 'Inserted Data');
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(-1, 'Inserted Data');
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-    })
+  //   test('Should not do anything if the number passed is negative or greater than the size of the list plus one.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(5, 'Inserted Data');
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(-1, 'Inserted Data');
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //   })
 
-    test('Should be able to use insertAt to insert multiple datapoints at a specific index if an array is passed.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(2, ['Inserted Data 1', 'Inserted Data 2']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Inserted Data 1',
-            next: expect.objectContaining({
-              data: 'Inserted Data 2',
-              next: expect.objectContaining({
-                data: 'Test Item 3',
-                next: expect.objectContaining({
-                  data: 'Test Item 4',
-                  next: null
-                })
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(6);
-    })
+  //   test('Should be able to use insertAt to insert multiple datapoints at a specific index if an array is passed.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(2, ['Inserted Data 1', 'Inserted Data 2']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Inserted Data 1',
+  //           next: expect.objectContaining({
+  //             data: 'Inserted Data 2',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 3',
+  //               next: expect.objectContaining({
+  //                 data: 'Test Item 4',
+  //                 next: null
+  //               })
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(6);
+  //   })
 
-    test('Should be able to use insertAt to insert an empty array at a specific index if an empty array is passed.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(2, []);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: [],
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: null
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert an empty array at a specific index if an empty array is passed.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(2, []);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: [],
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: null
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should be able to use insertAt to insert an array containing items at a specific index if the third parameter is set to true.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(2, ['Inserted Data 1', 'Inserted Data 2'], true);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: ['Inserted Data 1', 'Inserted Data 2'],
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: null
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert an array containing items at a specific index if the third parameter is set to true.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(2, ['Inserted Data 1', 'Inserted Data 2'], true);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: ['Inserted Data 1', 'Inserted Data 2'],
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: null
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should be able to use insertAt to insert multiple datapoints at the head if an array is passed.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(0, ['Inserted Data 1', 'Inserted Data 2']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Inserted Data 1',
-        next: expect.objectContaining({
-          data: 'Inserted Data 2',
-          next: expect.objectContaining({
-            data: 'Test Item',
-            next: expect.objectContaining({
-              data: 'Test Item 2',
-              next: expect.objectContaining({
-                data: 'Test Item 3',
-                next: expect.objectContaining({
-                  data: 'Test Item 4',
-                  next: null
-                })
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(6);
-    })
+  //   test('Should be able to use insertAt to insert multiple datapoints at the head if an array is passed.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(0, ['Inserted Data 1', 'Inserted Data 2']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Inserted Data 1',
+  //       next: expect.objectContaining({
+  //         data: 'Inserted Data 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 2',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 3',
+  //               next: expect.objectContaining({
+  //                 data: 'Test Item 4',
+  //                 next: null
+  //               })
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(6);
+  //   })
 
-    test('Should be able to use insertAt to insert an empty array at the head if an empty array is passed.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(0, []);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: [],
-        next: expect.objectContaining({
-          data: 'Test Item',
-          next: expect.objectContaining({
-            data: 'Test Item 2',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: null
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert an empty array at the head if an empty array is passed.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(0, []);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: [],
+  //       next: expect.objectContaining({
+  //         data: 'Test Item',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 2',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: null
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should be able to use insertAt to insert an array containing items at the head if the third parameter is set to true.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(0, ['Inserted Data 1', 'Inserted Data 2'], true);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: ['Inserted Data 1', 'Inserted Data 2'],
-        next: expect.objectContaining({
-          data: 'Test Item',
-          next: expect.objectContaining({
-            data: 'Test Item 2',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: null
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert an array containing items at the head if the third parameter is set to true.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(0, ['Inserted Data 1', 'Inserted Data 2'], true);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: ['Inserted Data 1', 'Inserted Data 2'],
+  //       next: expect.objectContaining({
+  //         data: 'Test Item',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 2',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: null
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should be able to use insertAt to insert multiple datapoints at the tail if an array is passed.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(4, ['Inserted Data 1', 'Inserted Data 2']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Inserted Data',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: expect.objectContaining({
-                  data: 'Inserted Data 1',
-                  next: expect.objectContaining({
-                    data: 'Inserted Data 2',
-                    next: null
-                  })
-                })
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(6);
-    })
+  //   test('Should be able to use insertAt to insert multiple datapoints at the tail if an array is passed.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(4, ['Inserted Data 1', 'Inserted Data 2']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Inserted Data',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: expect.objectContaining({
+  //                 data: 'Inserted Data 1',
+  //                 next: expect.objectContaining({
+  //                   data: 'Inserted Data 2',
+  //                   next: null
+  //                 })
+  //               })
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(6);
+  //   })
 
-    test('Should be able to use insertAt to insert an empty array at the tail if an empty array is passed.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(4, []);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Inserted Data',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: expect.objectContaining({
-                  data: [],
-                  next: null
-                })
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert an empty array at the tail if an empty array is passed.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(4, []);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Inserted Data',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: expect.objectContaining({
+  //                 data: [],
+  //                 next: null
+  //               })
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-    test('Should be able to use insertAt to insert an array containing items at the tail if the third parameter is set to true.', () => {
-      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Test Item 3',
-            next: expect.objectContaining({
-              data: 'Test Item 4',
-              next: null
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(4);
-      mySLL.insertAt(4, ['Inserted Data 1', 'Inserted Data 2'], true);
-      expect(mySLL.getList()).toEqual(expect.objectContaining({
-        data: 'Test Item',
-        next: expect.objectContaining({
-          data: 'Test Item 2',
-          next: expect.objectContaining({
-            data: 'Inserted Data',
-            next: expect.objectContaining({
-              data: 'Test Item 3',
-              next: expect.objectContaining({
-                data: 'Test Item 4',
-                next: expect.objectContaining({
-                  data: ['Inserted Data 1', 'Inserted Data 2'],
-                  next: null
-                })
-              })
-            })
-          }) 
-        })
-      }));
-      expect(mySLL.size()).toBe(5);
-    })
+  //   test('Should be able to use insertAt to insert an array containing items at the tail if the third parameter is set to true.', () => {
+  //     const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Test Item 3',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 4',
+  //             next: null
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(4);
+  //     mySLL.insertAt(4, ['Inserted Data 1', 'Inserted Data 2'], true);
+  //     expect(mySLL.getList()).toEqual(expect.objectContaining({
+  //       data: 'Test Item',
+  //       next: expect.objectContaining({
+  //         data: 'Test Item 2',
+  //         next: expect.objectContaining({
+  //           data: 'Inserted Data',
+  //           next: expect.objectContaining({
+  //             data: 'Test Item 3',
+  //             next: expect.objectContaining({
+  //               data: 'Test Item 4',
+  //               next: expect.objectContaining({
+  //                 data: ['Inserted Data 1', 'Inserted Data 2'],
+  //                 next: null
+  //               })
+  //             })
+  //           })
+  //         }) 
+  //       })
+  //     }));
+  //     expect(mySLL.size()).toBe(5);
+  //   })
 
-  })
+  // })
 
 })
