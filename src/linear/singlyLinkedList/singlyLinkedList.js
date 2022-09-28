@@ -236,12 +236,37 @@ class SLL {
 
   // Remove node from the tail.
   removeTail() {
-
+    let temp;
+    if (this.#head && this.#head.next) {
+      const recurse = (node) => {
+        if (node.next && node.next.next) {
+          recurse(node.next)
+        } else {
+          temp = node.next.data;
+          node.next = null;
+        }
+      }
+      recurse(this.#head);
+      this.#size--;
+      return temp;
+    } else if (this.#head) {
+      temp = this.#head.data;
+      this.#head = null;
+      this.#size--;
+      return temp;
+    }
+    return null;
   }
 
   // Remove node from the head.
   removeHead() {
-
+    if (this.#head) {
+      const headData = this.#head.data;
+      this.#head = this.#head.next;
+      this.#size--;
+      return headData;
+    }
+    return null;
   }
 
   // Remove all nodes containing specific data.

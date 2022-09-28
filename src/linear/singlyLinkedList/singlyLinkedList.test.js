@@ -1251,6 +1251,7 @@ describe('Singly Linked List Data Structure', () => {
           }) 
         })
       }));
+      expect(mySLL.size()).toBe(4);
       expect(mySLL.removeTail()).toBe('Test Item 4');
       expect(mySLL.getList()).toEqual(expect.objectContaining({
         data: 'Test Item',
@@ -1262,6 +1263,19 @@ describe('Singly Linked List Data Structure', () => {
           }) 
         })
       }));
+      expect(mySLL.size()).toBe(3);
+    })
+
+    test('Should return the remove the head and return it if the list only contains 1 item.', () => {
+      const mySLL = new SLL('Test Item');
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: null
+      }));
+      expect(mySLL.size()).toBe(1);
+      expect(mySLL.removeTail()).toBe('Test Item');
+      expect(mySLL.size()).toBe(0);
+      expect(mySLL.getList()).toBe(null);
     })
 
     test('Should return null and do nothing to the list if the list is empty.', () => {
@@ -1290,6 +1304,7 @@ describe('Singly Linked List Data Structure', () => {
           }) 
         })
       }));
+      expect(mySLL.size()).toBe(4);
       expect(mySLL.removeHead()).toBe('Test Item');
       expect(mySLL.getList()).toEqual(expect.objectContaining({
         data: 'Test Item 2',
@@ -1301,6 +1316,19 @@ describe('Singly Linked List Data Structure', () => {
           })
         }) 
       }));
+      expect(mySLL.size()).toBe(3);
+    })
+
+    test('Should return the remove the head and return it if the list only contains 1 item.', () => {
+      const mySLL = new SLL('Test Item');
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: null
+      }));
+      expect(mySLL.size()).toBe(1);
+      expect(mySLL.removeHead()).toBe('Test Item');
+      expect(mySLL.getList()).toBe(null);
+      expect(mySLL.size()).toBe(0);
     })
 
     test('Should return null and do nothing to the list if the list is empty.', () => {
@@ -1327,7 +1355,7 @@ describe('Singly Linked List Data Structure', () => {
     })
 
     test('Should be able to make matching more thorough when the second parameter is set to true.', () => {
-      
+
     })
 
   })
