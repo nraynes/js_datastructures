@@ -16,6 +16,7 @@ class SLL {
   #head = null;
   #size = 0;
   #tail = null;
+  #working = null;
   constructor(items, maxSize, arrayLiteral) {
     if (maxSize && typeof maxSize !== 'number') throw 'maxSize must be a number!';
     if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
@@ -38,6 +39,22 @@ class SLL {
       : null
     this.#tail = findTail(this.#head)
     this.#max = maxSize || 0;
+    this.#working = this.#head;
+  }
+
+  next() {
+    if (this.#working.next) {
+      this.#working = this.#working.next;
+    }
+    return this.#working.data
+  }
+
+  current() {
+    return this.#working.data
+  }
+
+  reset() {
+    this.#working = this.#head;
   }
 
   // Getter method for the tail.
@@ -251,6 +268,7 @@ class SLL {
             temp = {...node.next.next};
           } else {
             this.#tail = node
+            this.#working = this.#head
           }
           const retVal = node.next.data;
           node.next = temp;
@@ -274,6 +292,7 @@ class SLL {
       this.#head = null;
       this.#tail = null;
       this.#size = 0;
+      this.#working = this.#head
       return retVal;
     }
     return null;
@@ -290,6 +309,7 @@ class SLL {
           temp = node.next.data;
           node.next = null;
           this.#tail = node
+          this.#working = this.#head
         }
       }
       recurse(this.#head);
@@ -299,6 +319,7 @@ class SLL {
       temp = this.#head.data;
       this.#head = null;
       this.#tail = null;
+      this.#working = this.#head
       this.#size = 0;
       return temp;
     }
@@ -324,7 +345,10 @@ class SLL {
       if (node.next) {
         if ((extensiveComparison && compare(node.next.data, data)) || (!extensiveComparison && node.next.data === data)) {
           const temp = node.next.next || null;
-          if (!temp) this.#tail = node;
+          if (!temp) {
+            this.#tail = node;
+            this.#working = this.#head;
+          }
           node.next = temp;
           counter++;
           this.#size--;

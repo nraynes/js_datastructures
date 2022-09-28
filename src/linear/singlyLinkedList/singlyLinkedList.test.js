@@ -1608,4 +1608,66 @@ describe('Singly Linked List Data Structure', () => {
 
   })
 
+  describe('Should have a way to traverse through the list.', () => {
+
+    test('Should have a method to traverse through the list and supply the next working item.', () => {
+      const mySLL = new SLL(['Test Item 1', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(mySLL.next()).toBe('Test Item 2');
+      expect(mySLL.next()).toBe('Test Item 3');
+      expect(mySLL.next()).toBe('Test Item 4');
+      expect(mySLL.next()).toBe('Test Item 4');
+      mySLL.addToTail('Test Item 5')
+      expect(mySLL.next()).toBe('Test Item 5');
+      mySLL.removeTail()
+      expect(mySLL.next()).toBe('Test Item 2');
+      mySLL.addToHead('Test Item 0')
+      expect(mySLL.next()).toBe('Test Item 3');
+      mySLL.removeHead()
+      expect(mySLL.next()).toBe('Test Item 4');
+    })
+
+    test('Should have a method to get the current working item.', () => {
+      const mySLL = new SLL(['Test Item 1', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(mySLL.current()).toBe('Test Item 1');
+      expect(mySLL.next()).toBe('Test Item 2');
+      expect(mySLL.current()).toBe('Test Item 2');
+      expect(mySLL.next()).toBe('Test Item 3');
+      expect(mySLL.current()).toBe('Test Item 3');
+      expect(mySLL.next()).toBe('Test Item 4');
+      expect(mySLL.current()).toBe('Test Item 4');
+      expect(mySLL.next()).toBe('Test Item 4');
+      expect(mySLL.current()).toBe('Test Item 4');
+    })
+
+    test('Should have a way to get back to the head.', () => {
+      const mySLL = new SLL(['Test Item 1', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(mySLL.next()).toBe('Test Item 2');
+      expect(mySLL.next()).toBe('Test Item 3');
+      expect(mySLL.next()).toBe('Test Item 4');
+      expect(mySLL.next()).toBe('Test Item 4');
+      mySLL.addToTail('Test Item 5')
+      expect(mySLL.next()).toBe('Test Item 5');
+      mySLL.removeTail()
+      expect(mySLL.next()).toBe('Test Item 2');
+      mySLL.addToHead('Test Item 0')
+      expect(mySLL.next()).toBe('Test Item 3');
+      mySLL.removeHead()
+      expect(mySLL.next()).toBe('Test Item 4');
+      mySLL.reset()
+      expect(mySLL.next()).toBe('Test Item 2');
+      expect(mySLL.next()).toBe('Test Item 3');
+      expect(mySLL.next()).toBe('Test Item 4');
+      expect(mySLL.next()).toBe('Test Item 4');
+      mySLL.addToTail('Test Item 5')
+      expect(mySLL.next()).toBe('Test Item 5');
+      mySLL.removeTail()
+      expect(mySLL.next()).toBe('Test Item 2');
+      mySLL.addToHead('Test Item 0')
+      expect(mySLL.next()).toBe('Test Item 3');
+      mySLL.removeHead()
+      expect(mySLL.next()).toBe('Test Item 4');
+    })
+
+  })
+
 })
