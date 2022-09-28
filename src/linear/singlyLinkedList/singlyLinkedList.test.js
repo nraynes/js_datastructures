@@ -1225,11 +1225,109 @@ describe('Singly Linked List Data Structure', () => {
   describe('Should have a method to remove the data at a specfic index.', () => {
 
     test('Should be able to remove a node at a specific index and return it.', () => {
-
+      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 3',
+            next: expect.objectContaining({
+              data: 'Test Item 4',
+              next: null
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
+      expect(mySLL.removeAt(2)).toBe('Test Item 3');
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 4',
+            next: null
+          })
+        })
+      }));
+      expect(mySLL.size()).toBe(3)
     })
 
     test('Should return null and do nothing to the list if it is empty.', () => {
+      const mySLL = new SLL();
+      expect(mySLL.getList()).toBe(null);
+      expect(mySLL.removeAt(3)).toBe(null);
+      expect(mySLL.getList()).toBe(null);
+    })
 
+    test('Should return null and do nothing to the list if a negative number or a number greater than the size of the list is entered.', () => {
+      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 3',
+            next: expect.objectContaining({
+              data: 'Test Item 4',
+              next: null
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
+      expect(mySLL.removeAt(4)).toBe(null);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 3',
+            next: expect.objectContaining({
+              data: 'Test Item 4',
+              next: null
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
+      expect(mySLL.removeAt(-1)).toBe(null);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 3',
+            next: expect.objectContaining({
+              data: 'Test Item 4',
+              next: null
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
+    })
+
+    test('Should remove the head and return it if the list only contains 1 item and/or zero is supplied.', () => {
+      const mySLL = new SLL(['Test Item', 'Test Item 2']);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: null
+        })
+      }));
+      expect(mySLL.size()).toBe(2);
+      expect(mySLL.removeAt(0)).toBe('Test Item');
+      expect(mySLL.size()).toBe(1);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 2',
+        next: null
+      }));
+      expect(mySLL.removeAt(0)).toBe('Test Item 2');
+      expect(mySLL.size()).toBe(0);
+      expect(mySLL.getList()).toEqual(null);
     })
 
   })
@@ -1340,22 +1438,133 @@ describe('Singly Linked List Data Structure', () => {
     
   })
 
-  describe('Should haver a method to remove all data matching a given input.', () => {
+  describe('Should have a method to remove all data matching a given input.', () => {
 
     test('Should be able to remove all nodes matching a given input and return how many datapoints were deleted.', () => {
-
+      const mySLL = new SLL(['Test Item 2', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 2',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 3',
+            next: expect.objectContaining({
+              data: 'Test Item 2',
+              next: null
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
+      expect(mySLL.removeData('Test Item 2')).toBe(2);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 3',
+        next: expect.objectContaining({
+          data: 'Test Item 4',
+          next: null
+        })
+      }));
+      expect(mySLL.size()).toBe(2);
+      expect(mySLL.removeData('Test Item 4')).toBe(1);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 3',
+        next: null
+      }));
+      expect(mySLL.size()).toBe(1);
     })
 
     test('Should return null and do nothing to the list if it is empty.', () => {
-      
+      const mySLL = new SLL();
+      expect(mySLL.getList()).toBe(null);
+      expect(mySLL.removeData('Test')).toBe(null);
+      expect(mySLL.getList()).toBe(null);
     })
 
     test('Should return null if the given input is not found.', () => {
-
+      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 3',
+            next: expect.objectContaining({
+              data: 'Test Item 4',
+              next: null
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
+      expect(mySLL.removeData('Test')).toBe(null);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item',
+        next: expect.objectContaining({
+          data: 'Test Item 2',
+          next: expect.objectContaining({
+            data: 'Test Item 3',
+            next: expect.objectContaining({
+              data: 'Test Item 4',
+              next: null
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
     })
 
     test('Should be able to make matching more thorough when the second parameter is set to true.', () => {
-
+      const mySLL = new SLL(['Test Item 2', ['Test Item 2', 'Test Item 5', 54, true], new Date(888), ['Test Item 2', 'Test Item 5', 54, true], { myKey: 'myValue' }]);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 2',
+        next: expect.objectContaining({
+          data: ['Test Item 2', 'Test Item 5', 54, true],
+          next: expect.objectContaining({
+            data: new Date(888),
+            next: expect.objectContaining({
+              data: ['Test Item 2', 'Test Item 5', 54, true],
+              next: expect.objectContaining({
+                data: { myKey: 'myValue' },
+                next: null
+              })
+            })
+          }) 
+        })
+      }));
+      expect(mySLL.size()).toBe(4);
+      expect(mySLL.removeData(['Test Item 2', 'Test Item 5', 54, true])).toBe(null);
+      expect(mySLL.size()).toBe(4);
+      expect(mySLL.removeData(['Test Item 2', 'Test Item 5', 54, true], true)).toBe(2);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 2',
+        next: expect.objectContaining({
+          data: new Date(888),
+          next: expect.objectContaining({
+            data: { myKey: 'myValue' },
+            next: null
+          })
+        })
+      }));
+      expect(mySLL.size()).toBe(3);
+      expect(mySLL.removeData({ myKey: 'myValue' })).toBe(null);
+      expect(mySLL.size()).toBe(3);
+      expect(mySLL.removeData({ myKey: 'myValue' }, true)).toBe(1);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 2',
+        next: expect.objectContaining({
+          data: new Date(888),
+          next: null
+        })
+      }));
+      expect(mySLL.size()).toBe(2);
+      expect(mySLL.removeData(new Date(888))).toBe(null);
+      expect(mySLL.size()).toBe(2);
+      expect(mySLL.removeData(new Date(888), true)).toBe(1);
+      expect(mySLL.getList()).toEqual(expect.objectContaining({
+        data: 'Test Item 2',
+        next: null
+      }));
+      expect(mySLL.size()).toBe(1);
     })
 
   })

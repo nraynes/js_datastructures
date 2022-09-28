@@ -231,7 +231,36 @@ class SLL {
   // Remove node at a specific index.
   removeAt(index) {
     if (index && typeof index !== 'number') throw 'index must be a number!';
-
+    if (index < 0 || index > this.#size) return null;
+    const recurse = (node, i) => {
+      if (node.next) {
+        if (i+1 === index) {
+          let temp;
+          if (node.next.next) temp = {...node.next.next};
+          const retVal = node.next.data;
+          node.next = temp;
+          this.#size--;
+          return retVal;
+        }
+        return recurse(node.next, i+1);
+      }
+      return null;
+    }
+    if (this.#head && this.#head.next) {
+      if (index === 0) {
+        const retVal = this.#head.data
+        this.#head = this.#head.next;
+        this.#size--;
+        return retVal;
+      }
+      return recurse(this.#head, 0);
+    } else if (this.#head) {
+      const retVal = this.#head.data
+      this.#head = null;
+      this.#size = 0;
+      return retVal;
+    }
+    return null;
   }
 
   // Remove node from the tail.
