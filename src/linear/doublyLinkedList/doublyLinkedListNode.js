@@ -1,5 +1,5 @@
 class DLLNode {
-  constructor(data, prev, next) {
+  constructor(data, next, prev) {
     if (next && !(next instanceof DLLNode)) throw 'next needs to be an instance of DLLNode!';
     if (prev && !(prev instanceof DLLNode)) throw 'prev needs to be an instance of DLLNode!';
     this.data = data;
