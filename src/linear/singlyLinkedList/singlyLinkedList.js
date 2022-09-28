@@ -197,49 +197,46 @@ class SLL {
     }
   }
 
-  // Insert node at a specific index. (NOTE: Inserting multiple datapoints is not efficient, will be working on a better implementation soon.)
+  // Insert node at a specific index.
   insertAt(index, data, arrayLiteral) {
     if (index && typeof index !== 'number') throw 'index must be a number!';
     if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     if (index > this.#size+1 || index < 0) return null;
+    index++;
     const multiple = Array.isArray(data) && !arrayLiteral && data.length > 0
-    const traverseList = (node, i, item) => {
-      if (i+1 === index) {
-        const temp = {...node.next};
-        const tempLength = Object.keys(temp).length;
-        node.next = new SLLNode(item);
-        node.next.next = tempLength ? temp : null;
-        if (!tempLength) this.#tail = node.next;
-        this.#size++
-      } else if (node.next) {
-        traverseList(node.next, i+1, item)
-      }
-    }
-    if (multiple) {
-      for (let i = data.length-1; i >= 0; i--) {
-        if (index === 0) {
-          if (!this.#max || this.#size < this.#max) {
-            const temp = {...this.#head};
-            this.#head = new SLLNode(data[i]);
-            this.#head.next = Object.keys(temp).length ? temp : null;
-            this.#size++;
+    let j = 0
+    let temp;
+    const recurse = (node, i, hold) => {
+      if ((i+1 === index) && (!this.#max || this.#size < this.#max)) {
+        if (!hold) temp = node.next || null;
+        if (multiple) {
+          this.#size++;
+          if (j < data.length-1) {
+            const newNode = new SLLNode(data[j])
+            node.next = newNode;
+            j++;
+            recurse(node.next, i, true)
           } else {
-            break;
+            const newNode = new SLLNode(data[j])
+            newNode.next = temp;
+            node.next = newNode;
+            if (!temp) this.#tail = node.next
           }
         } else {
-          traverseList(this.#head, 0, data[i]);
+          const newNode = new SLLNode(data)
+          newNode.next = temp;
+          node.next = newNode;
+          if (!temp) this.#tail = node.next
+          this.#size++;
         }
-      }
-    } else if (!this.#max || this.#size < this.#max) {
-      if (index === 0) {
-        const temp = {...this.#head};
-        this.#head = new SLLNode(data);
-        this.#head.next = Object.keys(temp).length ? temp : null;
-        this.#size++;
       } else {
-        traverseList(this.#head, 0, data)
+        if (node.next) recurse(node.next, i+1);
       }
     }
+    const tempHead = new SLLNode();
+    tempHead.next = this.#head 
+    recurse(tempHead, 0)
+    this.#head = tempHead.next
   }
 
   // Remove node at a specific index.
