@@ -6,9 +6,10 @@
   - Stack
   - Queue
   - Deque (Double Ended Queue)
-
-*Currently this data structure is being implemented at the time of this writing (Sep 27, 2022).*
   - Singly Linked List
+
+*Currently this data structure is being implemented at the time of this writing (Sep 28, 2022).*
+  - Doubly Linked List
 
 **Note:**
 Read more about the features implemented in the data structures that are complete by opening the file for that

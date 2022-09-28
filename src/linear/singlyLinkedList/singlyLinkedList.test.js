@@ -1449,7 +1449,7 @@ describe('Singly Linked List Data Structure', () => {
           next: expect.objectContaining({
             data: 'Test Item 3',
             next: expect.objectContaining({
-              data: 'Test Item 2',
+              data: 'Test Item 4',
               next: null
             })
           }) 
@@ -1531,9 +1531,9 @@ describe('Singly Linked List Data Structure', () => {
           }) 
         })
       }));
-      expect(mySLL.size()).toBe(4);
+      expect(mySLL.size()).toBe(5);
       expect(mySLL.removeData(['Test Item 2', 'Test Item 5', 54, true])).toBe(null);
-      expect(mySLL.size()).toBe(4);
+      expect(mySLL.size()).toBe(5);
       expect(mySLL.removeData(['Test Item 2', 'Test Item 5', 54, true], true)).toBe(2);
       expect(mySLL.getList()).toEqual(expect.objectContaining({
         data: 'Test Item 2',

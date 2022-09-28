@@ -301,7 +301,33 @@ class SLL {
   // Remove all nodes containing specific data.
   removeData(data, extensiveComparison) {
     if (extensiveComparison !== undefined && typeof extensiveComparison !== 'boolean') throw 'extensiveComparison must be a boolean!';
-
+    let counter = 0;
+    const recurse = (node) => {
+      if (node && node.next) {
+        if ((extensiveComparison && compare(node.next.data, data)) || (!extensiveComparison && node.next.data === data)) {
+          const temp = node.next.next || null;
+          node.next = temp;
+          counter++;
+          this.#size--;
+        }
+        recurse(node.next);
+      }
+    }
+    if (this.#head && this.#head.next) {
+      recurse(this.#head);
+      if ((extensiveComparison && compare(this.#head.data, data)) || (!extensiveComparison && this.#head.data === data)) {
+        const temp = this.#head.next || null;
+        this.#head = temp;
+        this.#size--;
+        counter++;
+      }
+      return counter || null;
+    } else if (this.#head && ((extensiveComparison && compare(this.#head.data, data)) || (!extensiveComparison && this.#head.data === data))) {
+      this.#head = null;
+      this.#size = 0;
+      return 1;
+    }
+    return null;
   }
 }
 
