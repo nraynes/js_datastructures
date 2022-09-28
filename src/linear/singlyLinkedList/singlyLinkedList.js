@@ -185,12 +185,47 @@ class SLL {
     }
   }
 
-  // Insert node at a specific index.
+  // Insert node at a specific index. (NOTE: Inserting multiple datapoints is not efficient, will be working on a better implementation soon.)
   insertAt(index, data, arrayLiteral) {
     if (index && typeof index !== 'number') throw 'index must be a number!';
     if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
-    const itemsIsArray = Array.isArray(items);
-    
+    if (index > this.#size+1 || index < 0) return null;
+    const multiple = Array.isArray(data) && !arrayLiteral && data.length > 0
+    const traverseList = (node, i, item) => {
+      if (i+1 === index) {
+        const temp = {...node.next};
+        node.next = new SLLNode(item);
+        node.next.next = Object.keys(temp).length ? temp : null;
+        this.#size++
+      } else if (node.next) {
+        traverseList(node.next, i+1, item)
+      }
+    }
+    if (multiple) {
+      for (let i = data.length-1; i >= 0; i--) {
+        if (index === 0) {
+          if (!this.#max || this.#size < this.#max) {
+            const temp = {...this.#head};
+            this.#head = new SLLNode(data[i]);
+            this.#head.next = Object.keys(temp).length ? temp : null;
+            this.#size++;
+          } else {
+            break;
+          }
+        } else {
+          traverseList(this.#head, 0, data[i]);
+        }
+      }
+    } else if (!this.#max || this.#size < this.#max) {
+      if (index === 0) {
+        const temp = {...this.#head};
+        this.#head = new SLLNode(data);
+        this.#head.next = Object.keys(temp).length ? temp : null;
+        this.#size++;
+      } else {
+        traverseList(this.#head, 0, data)
+      }
+    }
   }
 
   // Remove node at a specific index.
