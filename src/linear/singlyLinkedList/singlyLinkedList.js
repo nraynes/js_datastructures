@@ -42,6 +42,7 @@ class SLL {
     this.#working = this.#head;
   }
 
+  // Traverse to the next node if there is one and return its data.
   next() {
     if (this.#working.next) {
       this.#working = this.#working.next;
@@ -49,10 +50,12 @@ class SLL {
     return this.#working.data
   }
 
+  // Get the current nodes data in the working list.
   current() {
     return this.#working.data
   }
 
+  // Reset the working list back to the head.
   reset() {
     this.#working = this.#head;
   }
