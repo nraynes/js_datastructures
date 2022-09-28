@@ -110,6 +110,41 @@ describe('Singly Linked List Data Structure', () => {
 
   })
 
+  describe('Should have a tail pointer and a method to get the tail.', () => {
+
+    test('Should have a method to get the tail.', () => {
+      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3']);
+      expect(mySLL.getTail()).toBe('Test Item 3');
+    })
+
+    test('Tail should update when new items are added to the tail or tail changes.', () => {
+      const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3']);
+      expect(mySLL.getTail()).toBe('Test Item 3');
+      mySLL.addToTail('Test Item 4')
+      expect(mySLL.getTail()).toBe('Test Item 4');
+      mySLL.addToTail('Test Item 5')
+      expect(mySLL.getTail()).toBe('Test Item 5');
+      mySLL.insertAt(5, 'Test Item 6')
+      expect(mySLL.getTail()).toBe('Test Item 6');
+      mySLL.insertAt(6, 'Test Item 7')
+      expect(mySLL.getTail()).toBe('Test Item 7');
+      mySLL.removeTail()
+      expect(mySLL.getTail()).toBe('Test Item 6');
+      mySLL.removeTail()
+      expect(mySLL.getTail()).toBe('Test Item 5');
+      mySLL.removeAt(4)
+      expect(mySLL.getTail()).toBe('Test Item 4');
+      mySLL.removeAt(3)
+      expect(mySLL.getTail()).toBe('Test Item 3');
+      mySLL.removeData('Test Item 3')
+      expect(mySLL.getTail()).toBe('Test Item 2');
+      mySLL.addToTail(['Test Item 10', 'Test Item 10', 'Test Item 10'])
+      mySLL.removeData('Test Item 10')
+      expect(mySLL.getTail()).toBe('Test Item 2');
+    })
+
+  })
+
   describe('Should have a method to return the whole list.', () => {
 
     test('Should be able to call getList to get the entire list.', () => {
@@ -1470,6 +1505,10 @@ describe('Singly Linked List Data Structure', () => {
         data: 'Test Item 3',
         next: null
       }));
+      expect(mySLL.size()).toBe(1);
+      mySLL.addToTail(['Test Item 10', 'Test Item 10', 'Test Item 10']);
+      expect(mySLL.size()).toBe(4)
+      expect(mySLL.removeData('Test Item 10')).toBe(3);
       expect(mySLL.size()).toBe(1);
     })
 

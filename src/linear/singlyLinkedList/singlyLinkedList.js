@@ -15,6 +15,7 @@ class SLL {
   #max = 0;
   #head = null;
   #size = 0;
+  #tail = null;
   constructor(items, maxSize, arrayLiteral) {
     if (maxSize && typeof maxSize !== 'number') throw 'maxSize must be a number!';
     if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
@@ -26,6 +27,7 @@ class SLL {
         return new SLLNode(items[i]);
       }
     }
+    const findTail = (node) => (node && node.next ? findTail(node.next) : node);
     this.#size = items ? 1 : 0
     this.#head = items || itemsIsArray
       ? itemsIsArray && !arrayLiteral && items.length > 0
@@ -34,7 +36,13 @@ class SLL {
           : new SLLNode(items[0], recurse(1))
         : new SLLNode(items)
       : null
+    this.#tail = findTail(this.#head)
     this.#max = maxSize || 0;
+  }
+
+  // Getter method for the tail.
+  getTail() {
+    return this.#tail.data;
   }
 
   // Returns the whole singly linked list.
@@ -57,9 +65,12 @@ class SLL {
             j++;
             recurse(node.next, i+1)
             this.#size++
+          } else {
+            this.#tail = node;
           }
         } else {
           node.next = new SLLNode(item);
+          this.#tail = node.next
           this.#size++
         }
       }
@@ -68,6 +79,7 @@ class SLL {
       recurse(this.#head, 1);
     } else {
       this.#head = new SLLNode(item);
+      this.#tail = this.#head
       this.#size++
     }
   }
@@ -194,8 +206,10 @@ class SLL {
     const traverseList = (node, i, item) => {
       if (i+1 === index) {
         const temp = {...node.next};
+        const tempLength = Object.keys(temp).length;
         node.next = new SLLNode(item);
-        node.next.next = Object.keys(temp).length ? temp : null;
+        node.next.next = tempLength ? temp : null;
+        if (!tempLength) this.#tail = node.next;
         this.#size++
       } else if (node.next) {
         traverseList(node.next, i+1, item)
@@ -235,8 +249,12 @@ class SLL {
     const recurse = (node, i) => {
       if (node.next) {
         if (i+1 === index) {
-          let temp;
-          if (node.next.next) temp = {...node.next.next};
+          let temp = null;
+          if (node.next.next) {
+            temp = {...node.next.next};
+          } else {
+            this.#tail = node
+          }
           const retVal = node.next.data;
           node.next = temp;
           this.#size--;
@@ -257,6 +275,7 @@ class SLL {
     } else if (this.#head) {
       const retVal = this.#head.data
       this.#head = null;
+      this.#tail = null;
       this.#size = 0;
       return retVal;
     }
@@ -273,6 +292,7 @@ class SLL {
         } else {
           temp = node.next.data;
           node.next = null;
+          this.#tail = node
         }
       }
       recurse(this.#head);
@@ -281,7 +301,8 @@ class SLL {
     } else if (this.#head) {
       temp = this.#head.data;
       this.#head = null;
-      this.#size--;
+      this.#tail = null;
+      this.#size = 0;
       return temp;
     }
     return null;
@@ -303,14 +324,17 @@ class SLL {
     if (extensiveComparison !== undefined && typeof extensiveComparison !== 'boolean') throw 'extensiveComparison must be a boolean!';
     let counter = 0;
     const recurse = (node) => {
-      if (node && node.next) {
+      if (node.next) {
         if ((extensiveComparison && compare(node.next.data, data)) || (!extensiveComparison && node.next.data === data)) {
           const temp = node.next.next || null;
+          if (!temp) this.#tail = node;
           node.next = temp;
           counter++;
           this.#size--;
+          recurse(node)
+        } else {
+          recurse(node.next);
         }
-        recurse(node.next);
       }
     }
     if (this.#head && this.#head.next) {
