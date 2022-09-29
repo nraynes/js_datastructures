@@ -10,7 +10,7 @@
   - Circular Linked List
   - Doubly Linked List
 
-*Currently this data structure is being implemented at the time of this writing (Sep 28, 2022).*
+*Currently this data structure is being implemented at the time of this writing (Sep 29, 2022).*
   - Hash Table
 
 **Note:**
