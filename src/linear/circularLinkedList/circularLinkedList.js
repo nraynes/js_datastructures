@@ -6,8 +6,9 @@ const compare = require('../../utils/compare');
   * A circular linked list is a data structure in which a parent node contains some data and a pointer to the next
   * node in the list. Each node in the list has a pointer to the next node along with some data, and the last node
   * points to the first node. This implementation does not include a reference to the head on the last node
-  * because of the way javascript works however modifies the next function to loop through the list. This
-  * has the same time complexity and accomplishes the same task in javascript. Because private members cannot be
+  * because the next just loops back to the head if your at the end of the list. This way a reference doesn't have to
+  * be updated every time an item is removed, updated, or added to the list.
+  * This has the same time complexity and accomplishes the same task in javascript. Because private members cannot be
   * inherited, this class does not inherit from SLL.
   * You can traverse a circular linked list by using either an index or an item itself.
   * circular linked lists can support operations such as addToTail, addToHead, insertAt, removeAt, removeHead,
@@ -237,13 +238,12 @@ class CLL {
         if (!hold) temp = node.next || null;
         if (multiple) {
           this.#size++;
+          const newNode = new CLLNode(data[j])
           if (j < data.length-1) {
-            const newNode = new CLLNode(data[j])
             node.next = newNode;
             j++;
             recurse(node.next, i, true)
           } else {
-            const newNode = new CLLNode(data[j])
             newNode.next = temp;
             node.next = newNode;
             if (!temp) this.#tail = node.next
@@ -274,7 +274,7 @@ class CLL {
         if (i+1 === index) {
           let temp = null;
           if (node.next.next) {
-            temp = {...node.next.next};
+            temp = node.next.next;
           } else {
             this.#tail = node
             this.#working = this.#head

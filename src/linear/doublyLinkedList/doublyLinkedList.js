@@ -21,22 +21,39 @@ class DLL {
     if (maxSize && typeof maxSize !== 'number') throw 'maxSize must be a number!';
     if (arrayLiteral !== undefined && typeof arrayLiteral !== 'boolean') throw 'arrayLiteral must be a boolean!';
     const itemsIsArray = Array.isArray(items);
+    let previous;
     const recurse = (i, max) => {
       this.#size++
       if (!max || i+1 <= maxSize) {
-        if (i+1 < items.length) return new DLLNode(items[i], recurse(i+1, max));
-        return new DLLNode(items[i]);
+        if (i+1 < items.length) {
+          const newNode = new DLLNode(items[i]);
+          newNode.prev = previous || null;
+          previous = newNode;
+          newNode.next = recurse(i+1, max);
+          return newNode;
+        };
+        const newNode = new DLLNode(items[i], null, previous || null);
+        previous = newNode;
+        return newNode;
       }
+      return null;
     }
     const findTail = (node) => (node && node.next ? findTail(node.next) : node);
     this.#size = items ? 1 : 0
-    this.#head = items || itemsIsArray
-      ? itemsIsArray && !arrayLiteral && items.length > 0
-        ? maxSize
-          ? new DLLNode(items[0], recurse(1, true))
-          : new DLLNode(items[0], recurse(1))
-        : new DLLNode(items)
-      : null
+    if (items || itemsIsArray) {
+      if (itemsIsArray && !arrayLiteral && items.length > 0) {
+        const newHead = new DLLNode(items[0])
+        previous = newHead;
+        if (maxSize) {
+          newHead.next = recurse(1, true)
+        } else {
+          newHead.next = recurse(1)
+        }
+        this.#head = newHead
+      } else {
+        this.#head = new DLLNode(items)
+      }
+    }
     this.#tail = findTail(this.#head)
     this.#max = maxSize || 0;
     this.#working = this.#head;
@@ -46,6 +63,14 @@ class DLL {
   next() {
     if (this.#working.next) {
       this.#working = this.#working.next;
+    }
+    return this.#working.data
+  }
+
+  // Traverse to the previouse node if there is one and return its data.
+  previous() {
+    if (this.#working.prev) {
+      this.#working = this.#working.prev;
     }
     return this.#working.data
   }
@@ -82,6 +107,7 @@ class DLL {
         if (itemIsArray && !arrayLiteral && item.length > 0) {
           if (j < item.length) {
             node.next = new DLLNode(item[j])
+            node.next.prev = node;
             j++;
             recurse(node.next, i+1)
             this.#size++
@@ -90,6 +116,7 @@ class DLL {
           }
         } else {
           node.next = new DLLNode(item);
+          node.next.prev = node;
           this.#tail = node.next
           this.#size++
         }
@@ -119,11 +146,13 @@ class DLL {
         const recurse = (node) => {
           if (j) {
             node.next = new DLLNode(item[j-1]);
+            node.next.prev = node;
             j--;
             recurse(node.next);
             this.#size++;
           } else {
             node.next = this.#head;
+            node.next.prev = node;
           }
         }
         const newHead = new DLLNode(item[j-1])
@@ -132,6 +161,7 @@ class DLL {
         this.#head = newHead;
       } else {
         const temp = new DLLNode(item, this.#head);
+        if (temp.next) temp.next.prev = temp;
         this.#head = temp;
       }
       this.#size++
@@ -231,19 +261,21 @@ class DLL {
         if (!hold) temp = node.next || null;
         if (multiple) {
           this.#size++;
+          const newNode = new DLLNode(data[j])
           if (j < data.length-1) {
-            const newNode = new DLLNode(data[j])
+            newNode.prev = node;
             node.next = newNode;
             j++;
             recurse(node.next, i, true)
           } else {
-            const newNode = new DLLNode(data[j])
+            if (temp) temp.prev = newNode;
             newNode.next = temp;
             node.next = newNode;
             if (!temp) this.#tail = node.next
           }
         } else {
           const newNode = new DLLNode(data)
+          newNode.prev = node;
           newNode.next = temp;
           node.next = newNode;
           if (!temp) this.#tail = node.next
@@ -268,7 +300,8 @@ class DLL {
         if (i+1 === index) {
           let temp = null;
           if (node.next.next) {
-            temp = {...node.next.next};
+            temp = node.next.next;
+            temp.prev = node;
           } else {
             this.#tail = node
             this.#working = this.#head
@@ -286,6 +319,7 @@ class DLL {
       if (index === 0) {
         const retVal = this.#head.data
         this.#head = this.#head.next;
+        this.#head.prev = null;
         this.#size--;
         return retVal;
       }
@@ -333,7 +367,9 @@ class DLL {
   removeHead() {
     if (this.#head) {
       const headData = this.#head.data;
+      if (this.#working === this.#head) this.#working = this.#head.next
       this.#head = this.#head.next;
+      if (this.#head) this.#head.prev = null;
       this.#size--;
       return headData;
     }
@@ -351,6 +387,8 @@ class DLL {
           if (!temp) {
             this.#tail = node;
             this.#working = this.#head;
+          } else {
+            temp.prev = node;
           }
           node.next = temp;
           counter++;
@@ -365,6 +403,8 @@ class DLL {
       recurse(this.#head);
       if ((extensiveComparison && compare(this.#head.data, data)) || (!extensiveComparison && this.#head.data === data)) {
         const temp = this.#head.next || null;
+        temp.prev = null;
+        if (this.#working === this.#head) this.#working = temp
         this.#head = temp;
         this.#size--;
         counter++;
@@ -372,6 +412,7 @@ class DLL {
       return counter || null;
     } else if (this.#head && ((extensiveComparison && compare(this.#head.data, data)) || (!extensiveComparison && this.#head.data === data))) {
       this.#head = null;
+      this.#working = this.#head
       this.#size = 0;
       return 1;
     }

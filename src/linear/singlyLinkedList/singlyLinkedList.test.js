@@ -64,7 +64,7 @@ describe('Singly Linked List Data Structure', () => {
       }));
     })
 
-    test('Should be only add the items in an array up to the maximum size specified if one is passed.', () => {
+    test('Should only be able to add the items in an array up to the maximum size specified if one is passed.', () => {
       const mySLL = new SLL(['Test Item', 'Test Item 2', 'Test Item 3'], 1);
       expect(mySLL.getList()).toEqual(expect.objectContaining({
         data: 'Test Item',

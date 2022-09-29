@@ -231,13 +231,12 @@ class SLL {
         if (!hold) temp = node.next || null;
         if (multiple) {
           this.#size++;
+          const newNode = new SLLNode(data[j])
           if (j < data.length-1) {
-            const newNode = new SLLNode(data[j])
             node.next = newNode;
             j++;
             recurse(node.next, i, true)
           } else {
-            const newNode = new SLLNode(data[j])
             newNode.next = temp;
             node.next = newNode;
             if (!temp) this.#tail = node.next
@@ -268,7 +267,7 @@ class SLL {
         if (i+1 === index) {
           let temp = null;
           if (node.next.next) {
-            temp = {...node.next.next};
+            temp = node.next.next;
           } else {
             this.#tail = node
             this.#working = this.#head
