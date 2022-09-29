@@ -7,6 +7,7 @@
   - Queue
   - Deque (Double Ended Queue)
   - Singly Linked List
+  - Circular Linked List
 
 *Currently this data structure is being implemented at the time of this writing (Sep 28, 2022).*
   - Doubly Linked List
