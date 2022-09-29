@@ -1624,6 +1624,20 @@ describe('Doubly Linked List Data Structure', () => {
       expect(myDLL.next()).toBe('Test Item 3');
       myDLL.removeHead()
       expect(myDLL.next()).toBe('Test Item 4');
+      myDLL.insertAt(4, 'Test Item 5')
+      expect(myDLL.next()).toBe('Test Item 5');
+      myDLL.removeAt(4)
+      expect(myDLL.next()).toBe('Test Item 2');
+      myDLL.insertAt(0, 'Test Item 0')
+      expect(myDLL.next()).toBe('Test Item 3');
+      myDLL.removeAt(0)
+      expect(myDLL.next()).toBe('Test Item 4');
+      myDLL.removeTail()
+      expect(myDLL.next()).toBe('Test Item 2');
+      myDLL.insertAt(2, 'Inserted Item')
+      expect(myDLL.next()).toBe('Inserted Item');
+      myDLL.removeAt(2)
+      expect(myDLL.next()).toBe('Test Item 3');
     })
 
     test('Should have a method to traverse through the list and supply the previous working item.', () => {
@@ -1639,6 +1653,34 @@ describe('Doubly Linked List Data Structure', () => {
       myDLL.addToHead('Test Item 0')
       expect(myDLL.previous()).toBe('Test Item 0');
       myDLL.removeHead()
+      expect(myDLL.previous()).toBe('Test Item 1');
+      myDLL.addToTail('Test Item 5')
+      expect(myDLL.previous()).toBe('Test Item 1');
+      expect(myDLL.next()).toBe('Test Item 2');
+      expect(myDLL.next()).toBe('Test Item 3');
+      expect(myDLL.next()).toBe('Test Item 4');
+      expect(myDLL.next()).toBe('Test Item 5');
+      expect(myDLL.previous()).toBe('Test Item 4');
+      myDLL.removeTail()
+      expect(myDLL.previous()).toBe('Test Item 1');
+      myDLL.insertAt(0, 'Test Item 0')
+      expect(myDLL.previous()).toBe('Test Item 0');
+      myDLL.removeAt(0)
+      expect(myDLL.previous()).toBe('Test Item 1');
+      expect(myDLL.next()).toBe('Test Item 2');
+      expect(myDLL.next()).toBe('Test Item 3');
+      myDLL.insertAt(2, 'Inserted Data')
+      expect(myDLL.previous()).toBe('Inserted Data');
+      myDLL.removeAt(2)
+      expect(myDLL.current()).toBe('Test Item 2')
+      expect(myDLL.previous()).toBe('Test Item 1');
+      myDLL.insertAt(4, 'Inserted Data')
+      expect(myDLL.next()).toBe('Test Item 2');
+      expect(myDLL.next()).toBe('Test Item 3');
+      expect(myDLL.next()).toBe('Test Item 4');
+      expect(myDLL.next()).toBe('Inserted Data');
+      expect(myDLL.previous()).toBe('Test Item 4');
+      myDLL.removeAt(4)
       expect(myDLL.previous()).toBe('Test Item 1');
     })
 

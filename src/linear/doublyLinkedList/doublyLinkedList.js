@@ -268,7 +268,9 @@ class DLL {
             j++;
             recurse(node.next, i, true)
           } else {
-            if (temp) temp.prev = newNode;
+            if (temp) {
+              temp.prev = newNode;
+            }
             newNode.next = temp;
             node.next = newNode;
             if (!temp) this.#tail = node.next
@@ -276,6 +278,7 @@ class DLL {
         } else {
           const newNode = new DLLNode(data)
           newNode.prev = node;
+          if (temp) temp.prev = newNode;
           newNode.next = temp;
           node.next = newNode;
           if (!temp) this.#tail = node.next
@@ -289,6 +292,9 @@ class DLL {
     tempHead.next = this.#head 
     recurse(tempHead, 0)
     this.#head = tempHead.next
+    if (this.#head.next) {
+      this.#head.next.prev = this.#head
+    }
   }
 
   // Remove node at a specific index.
@@ -306,6 +312,7 @@ class DLL {
             this.#tail = node
             this.#working = this.#head
           }
+          if (this.#working === node.next) this.#working = node;
           const retVal = node.next.data;
           node.next = temp;
           this.#size--;
@@ -318,6 +325,7 @@ class DLL {
     if (this.#head && this.#head.next) {
       if (index === 0) {
         const retVal = this.#head.data
+        if (this.#working === this.#head) this.#working = this.#head.next
         this.#head = this.#head.next;
         this.#head.prev = null;
         this.#size--;
