@@ -17,7 +17,7 @@ These are some of the things that will be included in the next version.
 
 ## Version History
 
-**v1.1.1:**
+**v1.1.2:**
 All linear data structure are complete in this version. This includes:
   - Stack
   - Queue

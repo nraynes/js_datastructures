@@ -6,6 +6,13 @@
   "scripts": {
     "test": "npx jest"
   },
+  "keywords": [
+    "data structures",
+    "stack",
+    "queue",
+    "linked list",
+    "deque"
+  ],
   "author": "Nicholas R Raynes",
   "license": "ISC",
   "devDependencies": {
