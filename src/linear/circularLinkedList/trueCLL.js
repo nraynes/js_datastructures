@@ -3,6 +3,9 @@ const compare = require('../../utils/compare');
 
 /*
   * A circular linked list data structure class implementation.
+  * This is an untested version that uses a reference to the the head on the tails next property.
+  * It is the truest form of a circular linked list however jest which is the testing framework used for this package
+  * is not able to deal with circular structures and so this version could not be fully tested. Use at your own risk.
   * A circular linked list is a data structure in which a parent node contains some data and a pointer to the next
   * node in the list. Each node in the list has a pointer to the next node along with some data, and the last node
   * points to the first node. This implementation does not include a reference to the head on the last node
@@ -16,7 +19,7 @@ const compare = require('../../utils/compare');
   * To learn more about circular linked lists go to https://www.geeksforgeeks.org/implementation-linkedlist-javascript/ or
   * https://www.educative.io/answers/what-is-a-circular-linked-list.
 */
-class CLL {
+class TrueCLL {
   #max = 0;
   #head = null;
   #size = 0;
@@ -43,6 +46,7 @@ class CLL {
         : new CLLNode(items)
       : null
     this.#tail = findTail(this.#head)
+    if (this.#tail) this.#tail.next = this.#head;
     this.#max = maxSize || 0;
     this.#working = this.#head;
   }
@@ -51,8 +55,6 @@ class CLL {
   next() {
     if (this.#working.next) {
       this.#working = this.#working.next;
-    } else {
-      this.#working = this.#head
     }
     return this.#working.data
   }
@@ -74,7 +76,15 @@ class CLL {
 
   // Returns the whole circular linked list.
   getList() {
-    return this.#head;
+    const clonedHead = {...this.#head};
+    const recurse = (node) => {
+      if (node.next && node.next !== clonedHead) {
+        recurse(node.next);
+      } else {
+        node.next = null;
+      }
+    }
+    return clonedHead;
   }
 
   // Add a node to the very end of the list.
@@ -83,7 +93,7 @@ class CLL {
     const itemIsArray = Array.isArray(item);
     let j = 0;
     const recurse = (node, i) => {
-      if (node.next) {
+      if (node.next && this.#tail !== node) {
         recurse(node.next, i+1);
       } else if (!this.#max || i < this.#max) {
         if (itemIsArray && !arrayLiteral && item.length > 0) {
@@ -94,10 +104,12 @@ class CLL {
             this.#size++
           } else {
             this.#tail = node;
+            this.#tail.next = this.#head;
           }
         } else {
           node.next = new CLLNode(item);
           this.#tail = node.next
+          this.#tail.next = this.#head;
           this.#size++
         }
       }
@@ -156,7 +168,7 @@ class CLL {
     this.#max = maxSize || 0;
     if (this.#max && this.#size > this.#max) {
       const recurse = (node, i) => {
-        if (node.next && i >= this.#max) {
+        if (node.next  && this.#tail !== node && i >= this.#max) {
           node.next = null;
         } else {
           recurse(node.next, i+1)
@@ -185,7 +197,7 @@ class CLL {
       if ((extensiveComparison && compare(data, node.data)) || (!extensiveComparison && data === node.data)) {
         retVal.push(i)
       }
-      if (node.next) recurse(node.next, i+1);
+      if (node.next && this.#tail !== node) recurse(node.next, i+1);
     };
     recurse(this.#head, 0)
     return retVal.length ? retVal.length > 1 ? retVal : retVal[0] : null;
@@ -198,7 +210,7 @@ class CLL {
     const recurse = (node, i) => {
       if (i === index) {
         return node.data;
-      } else if (node.next) {
+      } else if (node.next && this.#tail !== node) {
         return recurse(node.next, i+1)
       }
       return null;
@@ -217,7 +229,7 @@ class CLL {
       }
       const recurse = (node) => {
         updateNewHead(node);
-        if (node.next) recurse(node.next)
+        if (node.next && this.#tail !== node) recurse(node.next)
       };
       recurse(this.#head)
       this.#head = newHead;
@@ -235,7 +247,7 @@ class CLL {
     let temp;
     const recurse = (node, i, hold) => {
       if ((i+1 === index) && (!this.#max || this.#size < this.#max)) {
-        if (!hold) temp = node.next || null;
+        if (!hold) temp = node.next && this.#tail !== node ? node.next : null;
         if (multiple) {
           this.#size++;
           const newNode = new CLLNode(data[j])
@@ -246,17 +258,17 @@ class CLL {
           } else {
             newNode.next = temp;
             node.next = newNode;
-            if (!temp) this.#tail = node.next
+            if (!temp) this.#tail = node.next; this.#tail.next = this.#head;
           }
         } else {
           const newNode = new CLLNode(data)
           newNode.next = temp;
           node.next = newNode;
-          if (!temp) this.#tail = node.next
+          if (!temp) this.#tail = node.next; this.#tail.next = this.#head;
           this.#size++;
         }
       } else {
-        if (node.next) recurse(node.next, i+1);
+        if (node.next && this.#tail !== node) recurse(node.next, i+1);
       }
     }
     const tempHead = new CLLNode();
@@ -270,13 +282,14 @@ class CLL {
     if (index && typeof index !== 'number') throw 'index must be a number!';
     if (index < 0 || index > this.#size) return null;
     const recurse = (node, i) => {
-      if (node.next) {
+      if (node.next && this.#tail !== node) {
         if (i+1 === index) {
           let temp = null;
           if (node.next.next) {
             temp = node.next.next;
           } else {
             this.#tail = node
+            this.#tail.next = this.#head;
             this.#working = this.#head
           }
           const retVal = node.next.data;
@@ -312,12 +325,13 @@ class CLL {
     let temp;
     if (this.#head && this.#head.next) {
       const recurse = (node) => {
-        if (node.next && node.next.next) {
+        if (node.next && node.next.next && this.#tail !== node) {
           recurse(node.next)
         } else {
           temp = node.next.data;
           node.next = null;
           this.#tail = node
+          this.#tail.next = this.#head;
           this.#working = this.#head
         }
       }
@@ -351,11 +365,12 @@ class CLL {
     if (extensiveComparison !== undefined && typeof extensiveComparison !== 'boolean') throw 'extensiveComparison must be a boolean!';
     let counter = 0;
     const recurse = (node) => {
-      if (node.next) {
+      if (node.next && this.#tail !== node) {
         if ((extensiveComparison && compare(node.next.data, data)) || (!extensiveComparison && node.next.data === data)) {
-          const temp = node.next.next || null;
+          const temp =  node.next.next && this.#tail !== node.next ? node.next.next : null;
           if (!temp) {
             this.#tail = node;
+            this.#tail.next = this.#head;
             this.#working = this.#head;
           }
           node.next = temp;
@@ -370,7 +385,7 @@ class CLL {
     if (this.#head && this.#head.next) {
       recurse(this.#head);
       if ((extensiveComparison && compare(this.#head.data, data)) || (!extensiveComparison && this.#head.data === data)) {
-        const temp = this.#head.next || null;
+        const temp = this.#head.next && this.#tail !== this.#head ? this.#head.next : null;
         this.#head = temp;
         this.#size--;
         counter++;
@@ -385,4 +400,4 @@ class CLL {
   }
 }
 
-module.exports = CLL;
+module.exports = TrueCLL;
