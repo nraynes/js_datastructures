@@ -2,10 +2,6 @@
 
 All common data structures implemented in one package. All data structures are FULLY TESTED. Just grab the data structure you need and start using it right away!
 
-**GitHub:**
-Check out the Github page at https://github.com/nraynes/js_datastructures.    
-
-
 ## Installation:
 
     npm install complete_data_structures
