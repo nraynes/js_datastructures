@@ -9,6 +9,8 @@ A singly linked list is a list of nodes where each node has a pointer to the nex
       next: Pointer - - - - - /          next: Pointer - - - - - /          next: null
     }                                  }                                  }
 
+You can create a new singly linked list with the following code.
+
 **ES6:**    
 
     import { SLL } from 'complete_data_structures';
@@ -47,4 +49,452 @@ Here the maximum size is set to 8 so the linked list can never have more than 8 
 
 All of the properties in the linked list are private and use getter and setter methods to provide access when needed. This provides encapsulation and makes sure that values can't accidently be set to the wrong thing (Imagine trying to set the maximum size to a Array!). Here are the methods that are supported by the linked list implementation:
 
-**Method descriptions are coming soon**
+***getList***
+
+This method is simple, you call it and it returns the entire linked list. Will return null if the list is empty.    
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.getList();
+    // Expected Output: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: null
+            }
+        }
+    }
+
+***next***
+
+When you instantiate a new linked list it will start with a state set to the head node. The next method will move the pointer to the next node if there is one and return its data. This is how you traverse through the list. If there are no more nodes to traverse through, then it will keep returning the data value of the last node.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.next();
+    // Expected Output: 'SomeVar2'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: null
+            }
+        }
+    }
+
+***current***
+
+This will not move the pointer and just return the data from the node that the pointer is currently pointing to.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.current();
+    // Expected Output: 'SomeVar1'
+    myStack.next();
+    // Expected Output: 'SomeVar2'
+    myStack.current();
+    // Expected Output: 'SomeVar2'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: null
+            }
+        }
+    }
+
+***reset***
+
+This will reset the pointer back to the head node. This does not return anything.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.current();
+    // Expected Output: 'SomeVar1'
+    myStack.next();
+    // Expected Output: 'SomeVar2'
+    myStack.current();
+    // Expected Output: 'SomeVar2'
+    myStack.reset();
+    // Expected Output: undefined
+    myStack.current();
+    // Expected Output: 'SomeVar1'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: null
+            }
+        }
+    }
+
+***getTail***
+
+This will simply get the data from the tail node and return it.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.getTail();
+    // Expected Output: 'SomeVar3'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: null
+            }
+        }
+    }
+
+***size***
+
+This will just return the current size of the list.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.size();
+    // Expected Output: 3
+
+***addToTail***
+
+This will add an item to the tail of the list. You can also pass an array of items to add multiple items at once, or pass an empty array to add a node with an empty array, or set the second parameter to true if you want to add an array of items as a literal array of items. This works in the same way as when you instantiate a new linked list. This method does not return anything.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.getTail();
+    // Expected Output: 'SomeVar3'
+    myStack.addToTail('SomeVar4');
+    // Expected Output: undefined
+    myStack.getTail();
+    // Expected Output: 'SomeVar4'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: {
+                    data: 'SomeVar4',
+                    next: null
+                }
+            }
+        }
+    }
+
+OR
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.getTail();
+    // Expected Output: 'SomeVar3'
+    myStack.addToTail(['SomeVar4', 'SomeVar5']);
+    // Expected Output: undefined
+    myStack.getTail();
+    // Expected Output: 'SomeVar5'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: {
+                    data: 'SomeVar4',
+                    next: {
+                        data: 'SomeVar5',
+                        next: null
+                    }
+                }
+            }
+        }
+    }
+
+OR
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.getTail();
+    // Expected Output: 'SomeVar3'
+    myStack.addToTail([]);
+    // Expected Output: undefined
+    myStack.getTail();
+    // Expected Output: []
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: {
+                    data: [],
+                    next: null
+                }
+            }
+        }
+    }
+
+OR
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.getTail();
+    // Expected Output: 'SomeVar3'
+    myStack.addToTail(['SomeVar4', 'SomeVar5'], true);
+    // Expected Output: undefined
+    myStack.getTail();
+    // Expected Output: ['SomeVar4', 'SomeVar5']
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar3',
+                next: {
+                    data: ['SomeVar4', 'SomeVar5'],
+                    next: null
+                }
+            }
+        }
+    }
+
+***addToHead***
+
+This method behaves exactly like the addToTail method except it adds items to the head of the list instead of the tail.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    myStack.addToHead('SomeVar4');
+    // Expected Output: undefined
+    // Current List: {
+        data: 'SomeVar4',
+        next: {
+            data: 'SomeVar1',
+            next: {
+                data: 'SomeVar2',
+                next: {
+                    data: 'SomeVar3',
+                    next: null
+                }
+            }
+        }
+    }
+
+***getMax***
+
+Gets the maximum size of the list if there is one. Will return null if no maximum size is set.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3'], 4);
+
+    mySLL.getMax()
+    // Expected Output: 4
+
+***setMax***
+
+This will set the maximum size of the list. This will also remove any items from the tail of the list that go over the new maximum size you set. This method does not return anything.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    mySLL.getMax()
+    // Expected Output: null
+    mySLL.setMax(4)
+    // Expected Output: undefined
+    mySLL.getMax()
+    // Expected Output: 4
+
+***isEmpty***
+
+This will return whether or not the list is empty.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    mySLL.isEmpty()
+    // Expected Output: false
+
+OR
+
+    const mySLL = new SLL();
+
+    mySLL.isEmpty()
+    // Expected Output: true
+
+***isFull***
+
+This will check to see if the list is at the maximum size if one is set and return whether or not its full. If no maximum size is set it returns null.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    mySLL.isFull()
+    // Expected Output: null
+
+OR
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3'], 3);
+
+    mySLL.isFull()
+    // Expected Output: true
+
+OR
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3'], 4);
+
+    mySLL.isFull()
+    // Expected Output: false
+
+***contains***
+
+This will search through the list and find all of the nodes with data that match a given parameter. If nothing is found it will return null. It will return an array with all of the index numbers of each node found to have a match or if only one match was found it will return that index as a number. You can supply a boolean for the second parameter to tell it to do an extensive comparison. This will cause it to search for items by comparing the json string of each items data. This of course is a bit slower so if you don't have any array's, object's, or date's in your linked list then it's better to not have this parameter set as it will slow down the search a bit.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3', 'SomeVar3']);
+
+    mySLL.contains('SomeVar2');
+    // Expected Output: 1
+    mySll.contains('SomeVar7');
+    // Expected Output: null
+    mySll.contains('SomeVar3');
+    // Expected Output: [2, 3]
+
+***getAt***
+
+This will get the data from the node at the index number passed to it. Will return null if the number passed is negative or out of range.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+
+    mySLL.getAt(1);
+    // Expected Output: 'SomeVar2'
+    mySLL.getAt(7);
+    // Expected Output: null
+    mySLL.getAt(-1);
+    // Expected Output: null
+
+***reverse***
+
+This will reverse the linked lists order. This does not return anything.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+    
+    mySLL.reverse()
+    // Expected Output: undefined
+    // Current List: {
+        data: 'SomeVar3',
+        next: {
+            data: 'SomeVar2',
+            next: {
+                data: 'SomeVar1',
+                next: null
+            }
+        }
+    }
+
+***insertAt***
+
+This will insert a node with data at a specific index. This does not return anything. The first parameter is the index you want to place the node at and the second parameter is data. You can add multiple items in the same way as addToHead and addToTail. The third parameter will tell the method to input your array as a literal array. You can also insert into the head or tail with this method.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+    
+    mySLL.insertAt(1, 'SomeVar0')
+    // Expected Output: undefined
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar0',
+            next: {
+                data: 'SomeVar2',
+                next: {
+                    data: 'SomeVar3',
+                    next: null
+                }
+            }
+        }
+    }
+
+***removeAt***
+
+This will remove a node at a specific index and return the data that was in that node. It will return null if a negative number or an out of range number is supplied. You can also remove the head or tail with this method.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+    
+    mySLL.removeAt(1)
+    // Expected Output: 'SomeVar2'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar3',
+            next: null
+        }
+    }
+
+***removeTail***
+
+This will remove the tail node from the list and return the data that was in that node.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+    
+    mySLL.removeTail()
+    // Expected Output: 'SomeVar3'
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar2',
+            next: null
+        }
+    }
+
+***removeHead***
+
+This will remove the head node from the list and return the data that was in that node.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3']);
+    
+    mySLL.removeHead()
+    // Expected Output: 'SomeVar1'
+    // Current List: {
+        data: 'SomeVar2',
+        next: {
+            data: 'SomeVar3',
+            next: null
+        }
+    }
+
+***removeData***
+
+This will remove all the nodes that match the data provided. You can use extensive comparison with this method just like you can with contains by setting the second parameter to true. The return value is the number of nodes that were removed.
+EXAMPLE:
+
+    const mySLL = new SLL(['SomeVar1', 'SomeVar2', 'SomeVar3', 'SomeVar2', 'SomeVar2']);
+    
+    mySLL.removeData('SomeVar2')
+    // Expected Output: 3
+    // Current List: {
+        data: 'SomeVar1',
+        next: {
+            data: 'SomeVar3',
+            next: null
+        }
+    }

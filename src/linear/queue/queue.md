@@ -2,7 +2,7 @@
 
 ## Queue
 
-A queue is similar to a stack in that it is a list of items however differs in where items can be inserted from. Think of a queue as an line at the grocery store checkout, you can only insert a person at the beginning and remove from the end when they are done checking out. Items move through the queue much like they would in a grocery store checkout line where one item gets removed and the next item after it is next in line. This is called First In First Out (FIFO) where the first item that went in (meaning the item that was put in before all of the other items) will be the first one to be retrieved. This queue can hold many different values and different types of values at once just as the queue can.
+A queue is similar to a stack in that it is a list of items however differs in where items can be inserted from. Think of a queue as an line at the grocery store checkout, you can only insert a person at the beginning and remove from the end when they are done checking out. Items move through the queue much like they would in a grocery store checkout line where one item gets removed and the next item after it is next in line. This is called First In First Out (FIFO) where the first item that went in (meaning the item that was put in before all of the other items) will be the first one to be retrieved. This queue can hold many different values and different types of values at once just as the queue can. Here is how you create a new queue.
 
 **ES6:**    
 

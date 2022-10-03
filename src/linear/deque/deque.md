@@ -2,7 +2,7 @@
 
 ## Deque
 
-A deque is a double ended queue. This means that you can insert and remove from both sides. Other than that it is exactly the same as a queue.
+A deque is a double ended queue. This means that you can insert and remove from both sides. Other than that it is exactly the same as a queue. Below is how you create a new deque.
 
 **ES6:**    
 
