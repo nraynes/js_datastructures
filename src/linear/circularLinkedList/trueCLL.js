@@ -3,9 +3,7 @@ const compare = require('../../utils/compare');
 
 /*
   * A circular linked list data structure class implementation.
-  * This is an untested version that uses a reference to the the head on the tails next property.
-  * It is the truest form of a circular linked list however jest which is the testing framework used for this package
-  * is not able to deal with circular structures and so this version could not be fully tested. Use at your own risk.
+  * This is the true version of the circular linked list that uses a reference to the the head on the tails next property.
   * A circular linked list is a data structure in which a parent node contains some data and a pointer to the next
   * node in the list. Each node in the list has a pointer to the next node along with some data, and the last node
   * points to the first node. This implementation does not include a reference to the head on the last node
@@ -53,10 +51,15 @@ class TrueCLL {
 
   // Traverse to the next node if there is one and return its data.
   next() {
-    if (this.#working.next) {
-      this.#working = this.#working.next;
+    if (this.#working) {
+      if (this.#working === this.#tail) {
+        this.#working = this.#head;
+      } else if (this.#working.next) {
+        this.#working = this.#working.next;
+      }
+      return this.#working.data;
     }
-    return this.#working.data
+    return null;
   }
 
   // Get the current nodes data in the working list.
@@ -76,6 +79,7 @@ class TrueCLL {
 
   // Returns the whole circular linked list.
   getList() {
+    if (!this.#head) return null;
     const clonedHead = {...this.#head};
     const recurse = (node) => {
       if (node.next && node.next !== clonedHead) {
@@ -282,10 +286,10 @@ class TrueCLL {
     if (index && typeof index !== 'number') throw 'index must be a number!';
     if (index < 0 || index > this.#size) return null;
     const recurse = (node, i) => {
-      if (node.next && this.#tail !== node) {
+      if (this.#tail !== node) {
         if (i+1 === index) {
-          let temp = null;
-          if (node.next.next) {
+          let temp = this.#head;
+          if (node.next.next && node.next !== this.#tail) {
             temp = node.next.next;
           } else {
             this.#tail = node
@@ -297,7 +301,7 @@ class TrueCLL {
           this.#size--;
           return retVal;
         }
-        return recurse(node.next, i+1);
+        if (i < this.#size-1) return recurse(node.next, i+1);
       }
       return null;
     }
@@ -323,16 +327,16 @@ class TrueCLL {
   // Remove node from the tail.
   removeTail() {
     let temp;
-    if (this.#head && this.#head.next) {
-      const recurse = (node) => {
-        if (node.next && node.next.next && this.#tail !== node) {
-          recurse(node.next)
-        } else {
+    if (this.#head && this.#head !== this.#tail) {
+      const recurse = (node, count = 0) => {
+        if (this.#tail === node.next) {
           temp = node.next.data;
           node.next = null;
           this.#tail = node
           this.#tail.next = this.#head;
           this.#working = this.#head
+        } else if (count <= this.#size) {
+          recurse(node.next, count+1)
         }
       }
       recurse(this.#head);
@@ -351,9 +355,14 @@ class TrueCLL {
 
   // Remove node from the head.
   removeHead() {
-    if (this.#head) {
+    if (this.#head && this.#head !== this.#tail) {
       const headData = this.#head.data;
       this.#head = this.#head.next;
+      this.#size--;
+      return headData;
+    } else if (this.#head) {
+      const headData = this.#head.data;
+      this.#head = null;
       this.#size--;
       return headData;
     }
