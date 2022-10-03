@@ -27,6 +27,9 @@ These are some of the things that will be included in the next version.
 
 ## Version History
 
+**v1.1.4**
+Made some bug fixes.
+
 **v1.1.3:**
 This update includes the following changes:
   - Some tests for the doubly linked list were changed to include extra edge cases.
