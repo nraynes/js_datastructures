@@ -24,6 +24,7 @@ These are some of the things that will be included in the next version.
 
 **v1.1.6**
   - Added a simple hash table data structure, implemented with linked list buckets.
+  - Fixed a problem with not being able to import doubly linked list or doubly linked list node.
 
 **v1.1.5**
 Added markdown files for singly linked list, doubly linked list, and circular linked list.
