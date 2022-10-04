@@ -1,6 +1,16 @@
 # Complete Data Structures
 
-All common data structures implemented in one package. All data structures are FULLY TESTED. Just grab the data structure you need and start using it right away!
+All common data structures implemented in one package. All data structures are FULLY TESTED. Just grab the data structure you need and start using it right away!    
+You can also import the different components used in each data structure, such as linked list node or hash table buckets. Here is an example:
+
+**ES6**
+
+    import { SLLNode, DLLNode, CLLNode, BucketNode, Bucket } from 'complete_data_structures';
+
+**CommonJS**
+
+    const { SLLNode, DLLNode, CLLNode, BucketNode, Bucket } = require('complete_data_structures');
+
 
 ## Installation:
 

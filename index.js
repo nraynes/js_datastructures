@@ -10,7 +10,7 @@ const DLLNode = require('./src/linear/doublyLinkedList/doublyLinkedListNode');
 const TrueCLL = require('./src/linear/circularLinkedList/trueCLL');
 const HashTable = require('./src/hash/hashTable/hashTable');
 const Bucket = require('./src/hash/hashTable/bucket');
-const Node = require('./src/hash/hashTable/bucketNode');
+const BucketNode = require('./src/hash/hashTable/bucketNode');
 
 module.exports = {
   Stack,
@@ -25,5 +25,5 @@ module.exports = {
   TrueCLL,
   HashTable,
   Bucket,
-  Node
+  BucketNode
 };

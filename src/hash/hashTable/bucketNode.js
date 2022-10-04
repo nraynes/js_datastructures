@@ -1,4 +1,4 @@
-class Node {
+class BucketNode {
   constructor(key, value, next) {
     this.key = key;
     this.value = value;
@@ -6,4 +6,4 @@ class Node {
   }
 }
 
-module.exports = Node;
+module.exports = BucketNode;

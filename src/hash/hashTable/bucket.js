@@ -1,8 +1,8 @@
-const Node = require('./bucketNode');
+const BucketNode = require('./bucketNode');
 
 class Bucket {
   constructor(key, value) {
-    this.head = key && typeof key === 'string' && value ? new Node(key, value) : null;
+    this.head = key && typeof key === 'string' && value ? new BucketNode(key, value) : null;
   }
   
   add(key, value) {
@@ -12,13 +12,13 @@ class Bucket {
         if (node.key === key) return true;
         recurse(node.next);
       } else {
-        node.next = new Node(key, value)
+        node.next = new BucketNode(key, value)
       }
     }
     if (this.head) {
       return recurse(this.head);
     }
-    this.head = new Node(key, value);
+    this.head = new BucketNode(key, value);
   }
   
   find(key) {
