@@ -22,6 +22,9 @@ These are some of the things that will be included in the next version.
 
 ## Version History
 
+**v1.1.6**
+  - Added a simple hash table data structure, implemented with linked list buckets.
+
 **v1.1.5**
 Added markdown files for singly linked list, doubly linked list, and circular linked list.
 

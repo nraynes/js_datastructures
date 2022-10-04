@@ -1,58 +1,54 @@
-const SLL = require('../../linear/singlyLinkedList/singlyLinkedList');
+const Bucket = require('./bucket');
 
-hash = (size, value) => {
-  const asciiValues = [...value].map((char) => (char.charCodeAt(0)));
-  const total = asciiValues.reduce((acc, val) => acc += val, 0);
-  const index = Math.floor(total % (size));
-  return index;
-}
+class HashTable {
+  #size = 0;
+  constructor(size = 128) {
+		this.table = new Array(size);
+    this.#size = 0;
+  }
 
-
-class Hashtable {
-  constructor (size = 20) {
-    this.table = [];
-    for (let i = 0; i < size; i++) {
-      this.table.push(new SLL())
+  #hash(key) {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+      hash += key.charCodeAt(i);
+    }
+    return hash % this.table.length;
+  }
+  
+  insert(key, value) {
+    if (typeof key !== 'string') return;
+    const index = this.#hash(key);
+    const pointer = this.table[index];
+    if (pointer) {
+      const duplicate = pointer.add(key, value);
+      if (!duplicate) this.#size++;
+    } else {
+      this.table[index] = new Bucket(key, value);
+      this.#size++;
     }
   }
-
-  contains = (key) => {
-    // Reject if input is not string.
-    if (typeof key !== 'string') throw new Error('Key must be of type string.')
-
-    // Hash the value into an index.
-    const index = hash(this.table.length, key);
-
-    // Find the value in the array at the index.
-    const valueList = this.table[index];
-    if (valueList.contains(key)) return true
+  
+  find(key) {
+    if (typeof key !== 'string') return;
+    const index = this.#hash(key);
+    const pointer = this.table[index];
+    if (pointer) {
+      return pointer.find(key);
+    }
     return null;
   }
-
-  addItem = (key, value) => {
-    // Reject if input is not string.
-    if (typeof key !== 'string') throw new Error('Key must be of type string.')
-
-    // Hash the key into an index.
-    const index = hash(this.table.length, key);
-
-    // First check to see if the key is already in the hash table.
-    const valueCheck = this.contains(key);
-
-    // Place the value at the index.
-    if (!valueCheck) this.table[index].push(key)
-  }
-
-  removeItem = (key) => {
-    // Reject if input is not string.
-    if (typeof key !== 'string') throw new Error('Key must be of type string.')
-
-    // Hash the value into an index.
-    const index = hash(this.table.length, key);
-
-    // Find the value in the array at the index.
-    this.table[index].removeData(key);
+  
+  remove(key) {
+    if (typeof key !== 'string') return;
+    const index = this.#hash(key);
+    const pointer = this.table[index];
+    if (pointer) {
+      const success = pointer.remove(key);
+      if (success) {
+        this.#size--;
+      }
+    }
   }
 }
 
-module.exports = Hashtable;
+module.exports = HashTable;
