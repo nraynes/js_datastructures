@@ -108,6 +108,19 @@ describe('Singly Linked List Data Structure', () => {
       }));
     })
 
+    test('Should throw an error if given the wrong type for parameters.', () => {
+      try {
+        const mySLL = new SLL('test', 'test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+      try {
+        const mySLL = new SLL('test', 0, 'test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+    })
+
   })
 
   describe('Should have a tail pointer and a method to get the tail.', () => {
@@ -298,6 +311,15 @@ describe('Singly Linked List Data Structure', () => {
       expect(mySLL.size()).toBe(2);
     })
 
+    test('Should throw an error if the wrong type is given for the second parameter.', () => {
+      try {
+        const mySLL = new SLL('Placeholder');
+        mySLL.addToTail('Test', 999);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method to add a node to the head of the list.', () => {
@@ -428,6 +450,15 @@ describe('Singly Linked List Data Structure', () => {
         })
       }))
       expect(mySLL.size()).toBe(2);
+    })
+
+    test('Should throw an error if the wrong type is given for the second parameter.', () => {
+      try {
+        const mySLL = new SLL('Placeholder');
+        mySLL.addToHead('Test', 999);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -601,6 +632,15 @@ describe('Singly Linked List Data Structure', () => {
       }));
     })
 
+    test('Should throw an error if the wrong type is passed.', () => {
+      try {
+        const mySLL = new SLL();
+        mySLL.setMax(true);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method isEmpty to see if the list is empty.', () => {
@@ -679,6 +719,15 @@ describe('Singly Linked List Data Structure', () => {
       expect(mySLL.contains(['Item One', new Date(77), { myKeyFour: 99, myKeyFive: null }, 778], true)).toBe(4);
     })
 
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const mySLL = new SLL();
+        mySLL.contains('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a getAt method that returns an item at a specific index.', () => {
@@ -705,6 +754,15 @@ describe('Singly Linked List Data Structure', () => {
       expect(mySLL.getAt(2)).toBe(null);
       expect(mySLL.getAt(0)).toBe(null);
       expect(mySLL.getAt(3)).toBe(null);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const mySLL = new SLL();
+        mySLL.getAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -1255,6 +1313,21 @@ describe('Singly Linked List Data Structure', () => {
       expect(mySLL.size()).toBe(5);
     })
 
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const mySLL = new SLL();
+        mySLL.insertAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+      try {
+        const mySLL = new SLL();
+        mySLL.contains(0, 'Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method to remove the data at a specfic index.', () => {
@@ -1363,6 +1436,15 @@ describe('Singly Linked List Data Structure', () => {
       expect(mySLL.removeAt(0)).toBe('Test Item 2');
       expect(mySLL.size()).toBe(0);
       expect(mySLL.getList()).toEqual(null);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const mySLL = new SLL();
+        mySLL.removeAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -1604,6 +1686,15 @@ describe('Singly Linked List Data Structure', () => {
         next: null
       }));
       expect(mySLL.size()).toBe(1);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const mySLL = new SLL();
+        mySLL.removeData('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })

@@ -52,6 +52,19 @@ describe('Stack Data Structure', () => {
       expect(myStack.size()).toBe(1)
     })
 
+    test('Should throw an error if any of the parameters do not match the correct type.', () => {
+      try {
+        const myStack = new Stack('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+      try {
+        const myStack = new Stack('Test', 0, 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+    })
+
   })
 
   describe('Should have a method to set maximum size after a stack is instantiated.', () => {
@@ -97,6 +110,15 @@ describe('Stack Data Structure', () => {
       myStack.push('Test Item 6');
       expect(myStack.size()).toBe(6);
       expect(myStack.peek()).toBe('Test Item 6');
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myStack = new Stack();
+        myStack.setMax(true)
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
     })
 
   })
@@ -157,6 +179,15 @@ describe('Stack Data Structure', () => {
       myStack.push(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4'], true);
       expect(myStack.peek()).toEqual(expect.arrayContaining(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4']));
       expect(myStack.size()).toBe(1)
+    })
+
+    test('Should throw an error if incorrect type is passed for the second parameter.', () => {
+      const myStack = new Stack();
+      try {
+        myStack.push([],54);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
     })
 
   })

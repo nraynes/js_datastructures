@@ -108,6 +108,19 @@ describe('Doubly Linked List Data Structure', () => {
       }));
     })
 
+    test('Should throw an error if given the wrong type for parameters.', () => {
+      try {
+        const myDLL = new DLL('test', 'test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+      try {
+        const myDLL = new DLL('test', 0, 'test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+    })
+
   })
 
   describe('Should have a tail pointer and a method to get the tail.', () => {
@@ -298,6 +311,15 @@ describe('Doubly Linked List Data Structure', () => {
       expect(myDLL.size()).toBe(2);
     })
 
+    test('Should throw an error if the wrong type is given for the second parameter.', () => {
+      try {
+        const myDLL = new DLL('Placeholder');
+        myDLL.addToTail('Test', 999);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method to add a node to the head of the list.', () => {
@@ -428,6 +450,15 @@ describe('Doubly Linked List Data Structure', () => {
         })
       }))
       expect(myDLL.size()).toBe(2);
+    })
+
+    test('Should throw an error if the wrong type is given for the second parameter.', () => {
+      try {
+        const myDLL = new DLL('Placeholder');
+        myDLL.addToHead('Test', 999);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -601,6 +632,15 @@ describe('Doubly Linked List Data Structure', () => {
       }));
     })
 
+    test('Should throw an error if the wrong type is passed.', () => {
+      try {
+        const myDLL = new DLL();
+        myDLL.setMax(true);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method isEmpty to see if the list is empty.', () => {
@@ -679,6 +719,15 @@ describe('Doubly Linked List Data Structure', () => {
       expect(myDLL.contains(['Item One', new Date(77), { myKeyFour: 99, myKeyFive: null }, 778], true)).toBe(4);
     })
 
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myDLL = new DLL();
+        myDLL.contains('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a getAt method that returns an item at a specific index.', () => {
@@ -705,6 +754,15 @@ describe('Doubly Linked List Data Structure', () => {
       expect(myDLL.getAt(2)).toBe(null);
       expect(myDLL.getAt(0)).toBe(null);
       expect(myDLL.getAt(3)).toBe(null);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myDLL = new DLL();
+        myDLL.getAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -1255,6 +1313,21 @@ describe('Doubly Linked List Data Structure', () => {
       expect(myDLL.size()).toBe(5);
     })
 
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myDLL = new DLL();
+        myDLL.insertAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+      try {
+        const myDLL = new DLL();
+        myDLL.contains(0, 'Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method to remove the data at a specfic index.', () => {
@@ -1363,6 +1436,15 @@ describe('Doubly Linked List Data Structure', () => {
       expect(myDLL.removeAt(0)).toBe('Test Item 2');
       expect(myDLL.size()).toBe(0);
       expect(myDLL.getList()).toEqual(null);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myDLL = new DLL();
+        myDLL.removeAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -1604,6 +1686,15 @@ describe('Doubly Linked List Data Structure', () => {
         next: null
       }));
       expect(myDLL.size()).toBe(1);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myDLL = new DLL();
+        myDLL.removeData('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })

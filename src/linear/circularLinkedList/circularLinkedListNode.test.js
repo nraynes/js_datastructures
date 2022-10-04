@@ -16,6 +16,14 @@ describe('Circular Linked List Node', () => {
       expect(myNode.next).toBe(null);
     })
 
+    test('Should throw an error if next is not an node instance.', () => {
+      try {
+        const myNode = new CLLNode('Test Item', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have an accessible data property.', () => {

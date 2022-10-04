@@ -18,6 +18,21 @@ describe('Doubly Linked List Node', () => {
       expect(myNode.prev).toBe(null);
     })
 
+    test('Should throw an error if next is not an node instance.', () => {
+      try {
+        const myNode = new DLLNode('Test Item', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
+    test('Should throw an error if prev is not an node instance.', () => {
+      try {
+        const myNode = new DLLNode('Test Item', new DLLNode(), 'test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
   })
 
   describe('Should have an accessible data property.', () => {

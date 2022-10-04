@@ -50,6 +50,19 @@ describe('Queue Data Structure', () => {
       myQueue.enqueue('Test Item 6');
       expect(myQueue.size()).toBe(6)
     })
+
+    test('Should throw an error if any of the parameters do not match the correct type.', () => {
+      try {
+        const myQueue = new Queue('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+      try {
+        const myQueue = new Queue('Test', 0, 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+    })
     
   })
 
@@ -89,6 +102,15 @@ describe('Queue Data Structure', () => {
       myQueue.setMax(0);
       myQueue.enqueue('Test Item 6');
       expect(myQueue.size()).toBe(6)
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myQueue = new Queue();
+        myQueue.setMax(true)
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
     })
 
   })
@@ -193,6 +215,15 @@ describe('Queue Data Structure', () => {
       myQueue.enqueue(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4'], true);
       expect(myQueue.peek()).toEqual(expect.arrayContaining(['Test Item 4', 'Test Item 3', 'Test Item 2', 'Test Item']));
       expect(myQueue.size()).toBe(1)
+    })
+
+    test('Should throw an error if incorrect type is passed for the second parameter.', () => {
+      const myQueue = new Queue();
+      try {
+        myQueue.enqueue([],54);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
     })
 
   })

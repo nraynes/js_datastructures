@@ -8,9 +8,9 @@ class Bucket {
   add(key, value) {
     if (typeof key !== 'string') return;
     const recurse = (node) => {
+      if (node.key === key) return true;
       if (node.next) {
-        if (node.key === key) return true;
-        recurse(node.next);
+        return recurse(node.next);
       } else {
         node.next = new BucketNode(key, value)
       }
@@ -36,17 +36,22 @@ class Bucket {
   }
   
   remove(key) {
-    if (typeof key !== 'string') return;
+    if (typeof key !== 'string') return false;
     const recurse = (node) => {
-      if (node.key === key) {
-        node = node.next;
-        return true;
-      } else if (node.next) {
-        recurse(node.next);
+      if (node.next) {
+        if (node.next.key === key) {
+          node.next = node.next.next;
+          return true;
+        }
+        return recurse(node.next);
       }
       return false;
     }
     if (this.head) {
+      if (this.head.key === key) {
+        this.head = this.head.next || null;
+        return true;
+      }
       return recurse(this.head);
     }
     return false;

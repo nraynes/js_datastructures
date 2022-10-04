@@ -51,6 +51,19 @@ describe('Deque Data Structure', () => {
       expect(myDeque.size()).toBe(6)
     })
     
+    test('Should throw an error if any of the parameters do not match the correct type.', () => {
+      try {
+        const myDeque = new Deque('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+      try {
+        const myDeque = new Deque('Test', 0, 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+    })
+
   })
 
   describe('Should have a method to set the max size after a deque has been instantiated.', () => {
@@ -89,6 +102,15 @@ describe('Deque Data Structure', () => {
       myDeque.setMax(0);
       myDeque.enqueueFront('Test Item 6');
       expect(myDeque.size()).toBe(6)
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myDeque = new Deque();
+        myDeque.setMax(true)
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
     })
 
   })
@@ -209,6 +231,15 @@ describe('Deque Data Structure', () => {
       expect(myDeque.size()).toBe(1)
     })
 
+    test('Should throw an error if incorrect type is passed for the second parameter.', () => {
+      const myDeque = new Deque();
+      try {
+        myDeque.enqueueFront([],54);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+    })
+
   })
 
   describe('Should have a method to enqueue an item from the rear.', () => {
@@ -246,6 +277,15 @@ describe('Deque Data Structure', () => {
       myDeque.enqueueRear(['Test Item', 'Test Item 2', 'Test Item 3', 'Test Item 4'], true);
       expect(myDeque.peekFront()).toEqual(expect.arrayContaining(['Test Item 4', 'Test Item 3', 'Test Item 2', 'Test Item']));
       expect(myDeque.size()).toBe(1)
+    })
+
+    test('Should throw an error if incorrect type is passed for the second parameter.', () => {
+      const myDeque = new Deque();
+      try {
+        myDeque.enqueueRear([],54);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
     })
 
   })
