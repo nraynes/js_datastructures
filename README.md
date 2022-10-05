@@ -1,5 +1,11 @@
 # Complete Data Structures
 
+***Feedback:***
+If you'd like to report issues/bugs or have new feature/implementation change suggestions please send me an email at hsleonfeedback@gmail.com. (No spam please!)
+
+***Note from developer:***
+Apologies for pushing some untested data structures early on. Originally, I only made this package for myself so I could sharpen my skills. After seeing how many downloads it got in it's first week, I will only be pushing new updates after everything is fully tested. Everything listed under Current Features below is fully tested. Updates and patches will be frequent as I develop this. Thank you for your patience while I complete this!    
+
 All common data structures implemented in one package. All data structures are FULLY TESTED. Just grab the data structure you need and start using it right away!    
 You can also import the different components used in each data structure, such as linked list node or hash table buckets. Here is an example:
 
@@ -13,6 +19,7 @@ You can also import the different components used in each data structure, such a
 
 
 ## Installation:
+You can install this package into your project by using this command.
 
     npm install complete_data_structures
 
@@ -24,6 +31,7 @@ You can also import the different components used in each data structure, such a
   - [Singly Linked List](./src/linear/singlyLinkedList/singlyLinkedList.md)
   - [Doubly Linked List](./src/linear/doublyLinkedList/doublyLinkedList.md)
   - [Circular Linked List](./src/linear/circularLinkedList/circularLinkedList.md)
+  - [Hash Table](./src/hash/hashTable/hashTable.md)
 
 ## Future Updates
 
@@ -37,8 +45,12 @@ These are the next items to be worked on for future updates.
     - isEmpty and isFull functions
     - Method to find the number of items in the table with a certain value and supply an array with their keys.
     - Method to remove all items containing a certain value.
+    - Rehashing when the size of the table needs to increase to accomodate more values.
 
 ## Version History
+
+**v1.1.8**
+  - Updated README to include hash table and added new hash table markdown file.
 
 **v1.1.7**
   - Added type checking error tests to all data structures.
