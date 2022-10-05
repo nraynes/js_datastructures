@@ -27,10 +27,22 @@ You can also import the different components used in each data structure, such a
 
 ## Future Updates
 
-These are some of the things that will be included in the next version.
-  - A hash table data structure will be fully implemented and tested in the next version.
+These are the next items to be worked on for future updates.
+  - The next data structure to be implemented will be a fully tested directed graph.
+  - Dijkstra's Algorithm will be baked into the directed graph as a helper function.
+  - HashTable and Bucket classes will improved upon to include features such as:
+    - instantiating and with multiple items.
+    - inserting multiple items with one command.
+    - The ability to set a maximum size of the table.
+    - isEmpty and isFull functions
+    - Method to find the number of items in the table with a certain value and supply an array with their keys.
+    - Method to remove all items containing a certain value.
 
 ## Version History
+
+**v1.1.7**
+  - Added type checking error tests to all data structures.
+  - Added tests for HashTable, Bucket, and BucketNode.
 
 **v1.1.6**
   - Added a simple hash table data structure, implemented with linked list buckets.

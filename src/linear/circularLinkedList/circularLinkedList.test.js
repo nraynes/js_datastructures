@@ -108,6 +108,19 @@ describe('Circular Linked List Data Structure', () => {
       }));
     })
 
+    test('Should throw an error if given the wrong type for parameters.', () => {
+      try {
+        const myCLL = new CLL('test', 'test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+      try {
+        const myCLL = new CLL('test', 0, 'test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String))
+      }
+    })
+
   })
 
   describe('Should have a tail pointer and a method to get the tail.', () => {
@@ -298,6 +311,15 @@ describe('Circular Linked List Data Structure', () => {
       expect(myCLL.size()).toBe(2);
     })
 
+    test('Should throw an error if the wrong type is given for the second parameter.', () => {
+      try {
+        const myCLL = new CLL('Placeholder');
+        myCLL.addToTail('Test', 999);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method to add a node to the head of the list.', () => {
@@ -428,6 +450,15 @@ describe('Circular Linked List Data Structure', () => {
         })
       }))
       expect(myCLL.size()).toBe(2);
+    })
+
+    test('Should throw an error if the wrong type is given for the second parameter.', () => {
+      try {
+        const myCLL = new CLL('Placeholder');
+        myCLL.addToHead('Test', 999);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -601,6 +632,15 @@ describe('Circular Linked List Data Structure', () => {
       }));
     })
 
+    test('Should throw an error if the wrong type is passed.', () => {
+      try {
+        const myCLL = new CLL();
+        myCLL.setMax(true);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method isEmpty to see if the list is empty.', () => {
@@ -679,6 +719,16 @@ describe('Circular Linked List Data Structure', () => {
       expect(myCLL.contains(['Item One', new Date(77), { myKeyFour: 99, myKeyFive: null }, 778], true)).toBe(4);
     })
 
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myCLL = new CLL();
+        myCLL.contains('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
+
   })
 
   describe('Should have a getAt method that returns an item at a specific index.', () => {
@@ -705,6 +755,15 @@ describe('Circular Linked List Data Structure', () => {
       expect(myCLL.getAt(2)).toBe(null);
       expect(myCLL.getAt(0)).toBe(null);
       expect(myCLL.getAt(3)).toBe(null);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myCLL = new CLL();
+        myCLL.getAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -1255,6 +1314,21 @@ describe('Circular Linked List Data Structure', () => {
       expect(myCLL.size()).toBe(5);
     })
 
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myCLL = new CLL();
+        myCLL.insertAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+      try {
+        const myCLL = new CLL();
+        myCLL.contains(0, 'Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
   describe('Should have a method to remove the data at a specfic index.', () => {
@@ -1363,6 +1437,15 @@ describe('Circular Linked List Data Structure', () => {
       expect(myCLL.removeAt(0)).toBe('Test Item 2');
       expect(myCLL.size()).toBe(0);
       expect(myCLL.getList()).toEqual(null);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myCLL = new CLL();
+        myCLL.removeAt('Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })
@@ -1604,6 +1687,15 @@ describe('Circular Linked List Data Structure', () => {
         next: null
       }));
       expect(myCLL.size()).toBe(1);
+    })
+
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myCLL = new CLL();
+        myCLL.removeData('Test', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
     })
 
   })

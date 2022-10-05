@@ -27,6 +27,19 @@ describe('Bucket Node Tests (Simple Linked List Node)', () => {
 
     })
 
+    test('Should throw an error if the wrong type is supplied.', () => {
+      try {
+        const myNode = new BucketNode(999);
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+      try {
+        const myNode = new BucketNode('Key', 'Some Value', 'Test');
+      } catch (e) {
+        expect(e).toEqual(expect.any(String));
+      }
+    })
+
   })
 
 })

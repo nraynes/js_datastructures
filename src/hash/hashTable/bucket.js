@@ -2,11 +2,13 @@ const BucketNode = require('./bucketNode');
 
 class Bucket {
   constructor(key, value) {
-    this.head = key && typeof key === 'string' && value ? new BucketNode(key, value) : null;
+    if (key && typeof key !== 'string') throw 'key must be a string!';
+    this.head = key && value ? new BucketNode(key, value) : null;
   }
   
   add(key, value) {
-    if (typeof key !== 'string') return;
+    if (!key) return null;
+    if (typeof key !== 'string') throw 'key must be a string!';
     const recurse = (node) => {
       if (node.key === key) return true;
       if (node.next) {
@@ -22,7 +24,8 @@ class Bucket {
   }
   
   find(key) {
-    if (typeof key !== 'string') return null;
+    if (!key) return null;
+    if (typeof key !== 'string') throw 'key must be a string!';
     const recurse = (node) => {
       if (node.key === key) {
         return node.value;
@@ -36,25 +39,26 @@ class Bucket {
   }
   
   remove(key) {
-    if (typeof key !== 'string') return false;
+    if (!key) return null;
+    if (typeof key !== 'string') throw 'key must be a string!';
     const recurse = (node) => {
       if (node.next) {
         if (node.next.key === key) {
+          const data = node.next.value;
           node.next = node.next.next;
-          return true;
+          return data;
         }
         return recurse(node.next);
       }
-      return false;
     }
     if (this.head) {
       if (this.head.key === key) {
+        const data = this.head.value
         this.head = this.head.next || null;
-        return true;
+        return data;
       }
       return recurse(this.head);
     }
-    return false;
   }
 }
 

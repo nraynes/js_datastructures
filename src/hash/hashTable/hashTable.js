@@ -19,7 +19,8 @@ class HashTable {
   }
   
   insert(key, value) {
-    if (typeof key !== 'string') return;
+    if (!key) return null;
+    if (typeof key !== 'string') throw 'key must be a string!';
     const index = this.#hash(key);
     const pointer = this.#table[index];
     if (pointer) {
@@ -32,7 +33,8 @@ class HashTable {
   }
   
   find(key) {
-    if (typeof key !== 'string') return;
+    if (!key) return null;
+    if (typeof key !== 'string') throw 'key must be a string!';
     const index = this.#hash(key);
     const pointer = this.#table[index];
     if (pointer) {
@@ -42,15 +44,18 @@ class HashTable {
   }
   
   remove(key) {
-    if (typeof key !== 'string') return;
+    if (!key) return null;
+    if (typeof key !== 'string') throw 'key must be a string!';
     const index = this.#hash(key);
     const pointer = this.#table[index];
     if (pointer) {
-      const success = pointer.remove(key);
-      if (success) {
+      const data = pointer.remove(key);
+      if (data !== undefined) {
         this.#size--;
+        return data;
       }
     }
+    return null;
   }
 
   size() {
